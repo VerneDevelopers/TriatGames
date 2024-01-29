@@ -5,10 +5,10 @@ import { PabloComponent } from './pablo/pablo.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [PabloComponent],
+  exports: [PabloComponent],
   imports: [
-    CommonModule,
-    PabloComponent
+    CommonModule
   ]
 })
 export class ComponentsModule { }

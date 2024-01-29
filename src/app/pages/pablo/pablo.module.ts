@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { PabloPageRoutingModule } from './pablo-routing.module';
 
 import { PabloPage } from './pablo.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PabloPageRoutingModule
+    PabloPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [PabloPage]
 })
