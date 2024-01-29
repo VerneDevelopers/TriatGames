@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'dani-pagina',
+    loadChildren: () => import('./dani-pagina/dani-pagina.module').then( m => m.DaniPaginaPageModule)
+  },
 ];
 
 @NgModule({

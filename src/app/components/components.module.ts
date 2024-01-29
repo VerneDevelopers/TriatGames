@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DaniComponentComponent } from './dani-component/dani-component.component';
 
 
 
@@ -7,6 +8,7 @@ import { CommonModule } from '@angular/common';
   declarations: [],
   imports: [
     CommonModule
-  ]
+  ],
+  exports:[DaniComponentComponent]
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
