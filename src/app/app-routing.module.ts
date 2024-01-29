@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'bernat',
+    loadChildren: () => import('./pages/bernat/bernat.module').then( m => m.BernatPageModule)
+  },
 ];
 
 @NgModule({
