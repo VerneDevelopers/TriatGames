@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'page-adri',
+    loadChildren: () => import('./page-adri/page-adri.module').then( m => m.PageAdriPageModule)
+  },
 ];
 
 @NgModule({
