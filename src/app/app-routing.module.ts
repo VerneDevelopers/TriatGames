@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'oscar',
+    loadChildren: () => import('./pages/oscar/oscar.module').then( m => m.OscarPageModule)
+  },
 ];
 
 @NgModule({
