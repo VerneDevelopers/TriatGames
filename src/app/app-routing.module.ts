@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'manucasado',
+    loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
+  },
 ];
 
 @NgModule({
