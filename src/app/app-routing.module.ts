@@ -17,6 +17,10 @@ const routes: Routes = [
   },{    path: 'manucasado',
     loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
   },
+  {
+    path: 'wordle',
+    loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule)
+  },
 ];
 
 @NgModule({
