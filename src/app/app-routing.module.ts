@@ -12,7 +12,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'manucasado',
+    path: 'bernat',
+    loadChildren: () => import('./pages/bernat/bernat.module').then( m => m.BernatPageModule)
+  },{    path: 'manucasado',
     loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
   },
 ];
