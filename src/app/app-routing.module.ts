@@ -16,7 +16,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/bernat/bernat.module').then( m => m.BernatPageModule)
   },{    path: 'manucasado',
     loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+
 ];
 
 @NgModule({
