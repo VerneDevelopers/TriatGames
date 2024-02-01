@@ -17,6 +17,10 @@ const routes: Routes = [
   },{    path: 'manucasado',
     loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
   },
+  {
+    path: 'vista-ahorcado',
+    loadChildren: () => import('./vista-ahorcado/vista-ahorcado.module').then( m => m.VistaAhorcadoPageModule)
+  },
 ];
 
 @NgModule({
