@@ -17,6 +17,10 @@ const routes: Routes = [
   },{    path: 'manucasado',
     loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
   },
+  {
+    path: 'trivial',
+    loadChildren: () => import('./trivial/trivial.module').then( m => m.TrivialPageModule)
+  },
 ];
 
 @NgModule({
