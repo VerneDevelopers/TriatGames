@@ -1,8 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
 
@@ -19,7 +14,7 @@
       <app-component-formu
       icon="text-outline" 
       [control]="form.controls.name" 
-      type="name"></app-component-formu>
+      type="name" placeholder="nombre"></app-component-formu>
   
       <div class="validators" *ngIf="form.controls.name.errors && form.controls.name.touched">
         <div *ngIf="form.controls.name.errors?.['required']">El nombre es requerido</div>
@@ -31,7 +26,7 @@
       <app-component-formu 
       icon="mail-outline" 
       [control]="form.controls.email" 
-      type="email"></app-component-formu>
+      type="email" placeholder="email"></app-component-formu>
   
       <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
         <div *ngIf="form.controls.email.errors?.['required']">El correo es requerido</div>
@@ -43,7 +38,7 @@
       <app-component-formu 
       icon="lock-closed-outline" 
       [control]="form.controls.password" 
-      type="password" ></app-component-formu>
+      type="password" placeholder="contraseña"></app-component-formu>
       
       <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
         <div *ngIf="form.controls.password.errors?.['required']">La contraseña es requerido</div>
@@ -54,6 +49,10 @@
         <ion-icon slot="end" name="person-add-outline"></ion-icon>
       </ion-button>
 
+      <ion-button  expand="block" mode="ios" fill="outline" routerLink="/login">
+        Login
+        <ion-icon slot="end" name="arrow-up-circle-outline"></ion-icon>
+      </ion-button>
     </form>
 
     
