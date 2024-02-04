@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ToolbarComponent } from './toolbar.component';
+import { MiheaderComponent } from './miheader.component';
 
-describe('ToolbarComponent', () => {
-  let component: ToolbarComponent;
-  let fixture: ComponentFixture<ToolbarComponent>;
+describe('MiheaderComponent', () => {
+  let component: MiheaderComponent;
+  let fixture: ComponentFixture<MiheaderComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ],
+      declarations: [ MiheaderComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ToolbarComponent);
+    fixture = TestBed.createComponent(MiheaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
