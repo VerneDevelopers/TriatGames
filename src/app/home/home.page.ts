@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServicioWordleService } from '../services/servicio-wordle.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,20 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(private servi : ServicioWordleService) {}
+
+  ngOnInit() {
+    
+  }
+
+  fire() {
+    var idUser = "pepe"
+    var palabra = "barco"
+    var fecha = "04-02-2024"
+    
+    this.servi.addJugada(idUser, palabra, fecha)
+  }
+
+    
 
 }
