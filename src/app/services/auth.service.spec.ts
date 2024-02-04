@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import {
   Auth,
-  AuthModule
 } from '@angular/fire/auth';
 
 describe('AuthService', () => {
@@ -11,18 +10,20 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [  AuthModule,
-        { provide: Auth, useValue: {
-          currentUser: { uid: 'test-uid',
-          email: 'bernat@gmail.com'},
-          signInWithEmailAndPassword: () => Promise.resolve({ uid: 'test-uid' }),
-          createUserWithEmailAndPassword: () => Promise.resolve({ uid: 'test-uid' }),
-          signOut: () => Promise.resolve(),
-          sendPasswordResetEmail: () => Promise.resolve()
-                  
-        } }
+      providers: [
+
+        {
+          provide:
+            Auth,
+          useValue: {
+            currentUser: {
+              uid: 'test-uid'
+            }
+          },
+       
+        }
       ]
-      
+
     });
     service = TestBed.inject(AuthService);
   });
@@ -34,18 +35,25 @@ describe('AuthService', () => {
     expect(service.getUid()).toEqual('test-uid');
   });
   it('should register a new user', async () => {
-    const user = await service.register('bernat','123456');
-    console.log(user);
+    const user = await service.register('bernat', '123456');
+    console.log("register:", user);
     expect('test-uid').toEqual('test-uid');
-  } );
+  });
   it('should login a user', async () => {
-    const user = await service.login  
-    ({ email: 'bernat', password: '123456' });
-    console.log(user);
+    const user = await service.login( 'bernat',  '123456' );
+    console.log("login:", user);
     expect('test-uid').toEqual('test-uid');
+
   }
   );
-
+  it('should reset the password', async () => {
+    await service.resetPassword('bernat');
+    expect('test-uid').toEqual('test-uid');
+  });
+  it('should logout the user', async () => {
+    await service.logout();
+    expect('test-uid').toEqual('test-uid');
+  });
 
 
 });

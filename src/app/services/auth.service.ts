@@ -4,7 +4,8 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  UserCredential
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -17,33 +18,42 @@ export class AuthService {
     return this.auth.currentUser?.uid;
   }
 
-  async register(email: string, password: string) {
+  async register(email: string, password: string):Promise<UserCredential | null>{
     try {
       const user = await createUserWithEmailAndPassword(this.auth, email, password);
       return user;
     } catch (e) {
+      console.log('ha fallado el registro',e);
       return null;
     }
   }
 
-  async login({ email, password }:any) {
+  async login( email:string, password :string):Promise<UserCredential | null>  {
     try {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       return user;
     } catch (e) {
+      console.log('ha fallado el login',e);
       return null;
     }
   }
 
   async resetPassword(email: string) {
     try {
-      await sendPasswordResetEmail(this.auth, email);
+       await sendPasswordResetEmail(this.auth, email);
     } catch (e) {
       console.log(e);
+      
     }
   }
 
   logout() {
-    return signOut(this.auth);
+    try {
+      return signOut(this.auth);
+    }
+    catch (e) {
+      console.log(e);
+      return Promise<void>;
+    }
   }
 }
