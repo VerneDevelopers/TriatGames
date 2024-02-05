@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { VistaAhorcadoPageRoutingModule } from './vista-ahorcado-routing.module';
+import { AhorcadoPageRoutingModule } from './ahorcado-routing.module';
 
-import { VistaAhorcadoPage } from './vista-ahorcado.page';
+import { AhorcadoPage } from './ahorcado.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VistaAhorcadoPageRoutingModule
+    AhorcadoPageRoutingModule
   ],
-  declarations: [VistaAhorcadoPage]
+  declarations: [AhorcadoPage]
 })
-export class VistaAhorcadoPageModule {}
+export class AhorcadoPageModule {}
