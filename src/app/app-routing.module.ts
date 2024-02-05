@@ -23,13 +23,13 @@ const routes: Routes = [
   },
 
   {
-    path: 'vista-ahorcado',
-    loadChildren: () => import('./vista-ahorcado/vista-ahorcado.module').then( m => m.VistaAhorcadoPageModule)
+    path: 'ahorcado',
+    loadChildren: () => import('./pages/ahorcado/ahorcado.module').then( m => m.AhorcadoPageModule)
   },
 
    {
     path: 'trivial',
-    loadChildren: () => import('./trivial/trivial.module').then( m => m.TrivialPageModule)
+    loadChildren: () => import('./pages/trivial/trivial.module').then( m => m.TrivialPageModule)
   },
 
 ];
