@@ -21,6 +21,12 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+
+  {
+    path: 'vista-ahorcado',
+    loadChildren: () => import('./vista-ahorcado/vista-ahorcado.module').then( m => m.VistaAhorcadoPageModule)
+  },
+
    {
     path: 'trivial',
     loadChildren: () => import('./trivial/trivial.module').then( m => m.TrivialPageModule)
