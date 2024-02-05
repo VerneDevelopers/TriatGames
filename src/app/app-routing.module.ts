@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
@@ -16,11 +17,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'bernat',
-    loadChildren: () => import('./pages/bernat/bernat.module').then( m => m.BernatPageModule)
-  },{    path: 'manucasado',
-    loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+
 ];
 
 @NgModule({
