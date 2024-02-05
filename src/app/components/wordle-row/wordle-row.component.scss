@@ -14,15 +14,21 @@ ion-col {
     font-size: 2em;
 }
 
-.green{
+.V{
     border-color:var(--ion-color-success);
     background-color: var(--ion-color-success) ;
     color: var(--ion-color-light);
 }
 
-.yellow{
+.A{
     border-color:var(--ion-color-warning);
     background-color: var(--ion-color-warning) ;
+    color: var(--ion-color-light);
+}
+
+.G{
+    border-color:var(--ion-color-medium);
+    background-color:var(--ion-color-medium);
     color: var(--ion-color-light);
 }
 

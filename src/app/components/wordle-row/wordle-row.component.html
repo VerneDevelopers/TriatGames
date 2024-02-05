@@ -1,22 +1,5 @@
 <ion-row>
-  <!--COLUMNA 1-->
-  <ion-col class="yellow">
-    A1
-  </ion-col>
-  <!--COLUMNA 2-->
-  <ion-col class="green">
-    A2
-  </ion-col>
-  <!--COLUMNA 3-->
-  <ion-col>
-    A3
-  </ion-col>
-  <!--COLUMNA 4-->
-  <ion-col>
-    A4
-  </ion-col>
-  <!--COLUMNA 5-->
-  <ion-col>
-    A5
+  <ion-col *ngFor="let letra of letras; let i = index" [ngClass]="'colores[' + i + ']'">
+    {{letra}}
   </ion-col>
 </ion-row>
