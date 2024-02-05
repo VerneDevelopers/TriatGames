@@ -18,6 +18,7 @@ import { ComponentFormuComponent } from "./component-formu/component-formu.compo
     CommonModule,
     IonicModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterLink
   ]
 
