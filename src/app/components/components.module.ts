@@ -1,14 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ManuCasadoComponent } from './manu-casado/manu-casado.component';
+
+import { IonicModule } from '@ionic/angular';
+import { RouterLink } from '@angular/router';
+import { MiheaderComponent } from './miheader/miheader.component';
+import { MimenuComponent } from './mimenu/mimenu.component';
+
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ComponentFormuComponent } from "./component-formu/component-formu.component";
 
 
 
 @NgModule({
-  declarations: [ManuCasadoComponent],
-  exports: [ManuCasadoComponent],
+  declarations: [MiheaderComponent,MimenuComponent,ComponentFormuComponent],
+  exports: [MimenuComponent,MiheaderComponent,ComponentFormuComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink
   ]
+
+
 })
-export class ComponentsModule { }
+export class ComponentsModule {}
