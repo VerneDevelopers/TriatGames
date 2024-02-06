@@ -9,7 +9,7 @@ export class WordleRowComponent  implements OnInit {
   @Input() palabra : string = '';
   @Input() aciertos : string = '';
   letras: string[] = ['','','','','']
-  colores : string[] = ['V','A','G','G','G']
+  colores : string[] = ['','','','','']
   constructor() {
     
    }
@@ -19,7 +19,9 @@ export class WordleRowComponent  implements OnInit {
     this.palabra= this.palabra.toUpperCase()
     if (this.palabra.length != 0){
       this.letras= this.palabra.split('');
-
+    }
+    if(this.aciertos.length != 0){
+      this.colores = this.aciertos.split('');
     }
   }
 
