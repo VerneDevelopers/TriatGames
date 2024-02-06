@@ -1,0 +1,7 @@
+{
+  "name": "TriatGames",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
