@@ -14,8 +14,8 @@ export class AhorcadoService {
     const documentRef = doc(collection(this.firestore, `users/${userId}/Ahorcado`));
 
     const data = {
-        letra: letra,
-        fecha: fecha
+        letra,
+        fecha
     };
 
     return setDoc(documentRef, data);
