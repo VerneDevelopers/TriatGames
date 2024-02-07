@@ -1,6 +1,15 @@
-<ion-list ngIf="listaEntrada != undefined">
-  <ion-item *ngFor="let item of listaEntrada">
-    {{ item }}
+<ion-list>
+  <ion-item *ngFor="let item of listaVisible; let i = index">
+    <ion-label>
+      <h2>{{ i + 1 }}º - {{ item.name }}</h2>
+      <p>Puntos: {{ item.puntuacion }}</p>
+    </ion-label>
   </ion-item>
 </ion-list>
+
+<ion-button *ngIf="!mostrarTodos" (click)="muestraTodos()">Ver todos</ion-button>
+
+
+
+
 

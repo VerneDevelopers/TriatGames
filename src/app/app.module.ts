@@ -21,7 +21,7 @@ import { ComponentsModule } from './components/components.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-ComponentsModule,
+    ComponentsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
