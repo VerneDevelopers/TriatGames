@@ -4,7 +4,14 @@
 
 export const environment = {
   production: false,
-  firebaseConfig: {}
+  firebaseConfig: {
+    apiKey: "AIzaSyBFsS0oOKjnjazHg7Ka9PAqKUf9A3_t2hc",
+    authDomain: "pruebatriatgames.firebaseapp.com",
+    projectId: "pruebatriatgames",
+    storageBucket: "pruebatriatgames.appspot.com",
+    messagingSenderId: "957859222692",
+    appId: "1:957859222692:web:da8f896691105aaef9c231"
+  }
 };
 
 /*
