@@ -7,7 +7,12 @@
     </ion-buttons>
     <!--Saludo al usuario-->
     <!--Pendiente de implementar completamente con FireBase-->
-    <ion-title>Hola {{usuario}}</ion-title>
+    <ion-title>
+      <ion-avatar class="avatar">
+        <img [src]="getGravatarURL(usuario)" alt="Gravatar">
+      </ion-avatar>
+      <!-- Hola {{usuario}} -->
+    </ion-title>
     <!--Botón de deslogueo pendiente de implementar-->
     <ion-button slot="end"><ion-icon name="log-out-outline"></ion-icon></ion-button>
   </ion-toolbar>

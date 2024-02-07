@@ -28,7 +28,9 @@
     "@capacitor/keyboard": "5.0.7",
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
+    "fire": "^0.55.1",
     "ionicons": "^7.0.0",
+    "js-sha256": "^0.11.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
