@@ -10,7 +10,7 @@ import { Data } from '@angular/router';
 export class AhorcadoService {
   constructor(private afs: AngularFirestore, private firestore: Firestore) { }
 
-  addJugada(userId:string, letra:string, fecha:Data) {
+  addJugada(userId:string, letra:string, fecha:Date) {
     const documentRef = doc(collection(this.firestore, `users/${userId}/Ahorcado`));
 
     const data = {
