@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ScoreService } from '../services/score.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  constructor(private serv: ScoreService) {
+    this.serv.getPuntuacion().subscribe((s) => {
+      console.log(s)
+    }
+    )
+  }
 }
