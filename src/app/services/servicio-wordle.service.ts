@@ -11,8 +11,10 @@ export class ServicioWordleService {
 
   constructor(private firestore: Firestore) { }
 
-  calcularRespuesta(palabra: string, palabradeldia: string): string {
+  calcularRespuesta(palabra: string): string {
     palabra = palabra.toUpperCase()
+
+    var palabradeldia = this.palabraDia()
 
     palabradeldia = palabradeldia.toUpperCase()
 
@@ -39,27 +41,47 @@ export class ServicioWordleService {
     return respu
   }
 
-  palabraDiaFire() : Observable<any[]> {
+  /*palabrasDiaFire() : Observable<any[]> {
     const coleccion = collection(this.firestore, `palabrasWordle`);
     return collectionData(coleccion, {idField: 'id'})
     .pipe(
       map(palabras => palabras)
     );
+  }*/
+  palabrasDiaFire() : Observable<any[]> {
+    const coleccion = collection(this.firestore, 'palabrasWordle');
+    return collectionData(coleccion, { idField: 'id' });
   }
+  
+  palabraDia() : string {
+    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    };
+    var fecha = new Date();
+    var fechaString : string = fecha.toLocaleString("es-ES", opcionesDeFormato);
 
-  //Terminar palabraDia
-  /*palabraDia() : string {
-    var pas = this.palabraDiaFire().subscribe(
-      s=>
+    var palabra = ""
 
-      s.length
+    var pas = this.palabrasDiaFire().subscribe(
+      resp => {
+        for(var i = 0; i <= resp.length;i++) {
+          if (resp[i]) {
+            if (fechaString == resp[i].fecha) {
+              palabra = resp[i].palabra
+            }
+          }
+        }
+      }
     )
 
-    
-    
-    
-    return ""
-  }*/
+    if (palabra == "") {
+      palabra = "Hoy no hay palabra"
+    }
+
+    return palabra;
+  }
 
   addJugada(idUser: string, fecha: string, palabra: string): Promise<void> {
 
@@ -68,11 +90,6 @@ export class ServicioWordleService {
     
 
     const document = doc(collection(this.firestore, `${idUser}/${fecha}`));
-
-
-
-
-
     return setDoc(document, { palabra: palabra });
 
   }

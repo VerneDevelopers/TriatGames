@@ -22,6 +22,24 @@ export class HomePage {
     this.servi.addJugada(idUser, palabra, fecha)
   }*/
 
+  fecha() {
+    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    };
+    var fecha = new Date();
+
+    var fechaString : string = fecha.toLocaleString("es-ES", opcionesDeFormato);
+
+    console.log(fechaString)
+  }
+
+  palabra() {
+    var palabra = this.servi.palabraDia()
+    console.log(palabra)
+  }
+
     
 
 }
