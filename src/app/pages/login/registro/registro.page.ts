@@ -39,21 +39,24 @@ export class RegistroPage implements OnInit {
         try {
           // Utilizamos el método de registro del servicio AuthService de Oscar
           const userCredential = await this.AuthSvc.register(email, password);
-          if (userCredential) {
+          if (userCredential!=null) {
             // Si el registro es existoso, dirigimos al usuario al home
             this.router.navigateByUrl('home')
             //Terminamos el loading una vez en el home
             this.loadingCtrl.dismiss();
+          }else
+          {
+              console.log("ERROR")
+              this.presentToast({
+                message: 'Puede ser que ya estes registrado...?',
+                duration: 1500,
+                position: 'middle',
+                color: 'primary',
+                icon: 'alert-circle-outline'
+              })
           }
         } catch (error) {
-          console.log(error)
-          this.presentToast({
-            message: 'Ha ocurrido un error',
-            duration: 1500,
-            position: 'middle',
-            color: 'primary',
-            icon: 'alert-circle-outline'
-          })
+          console.log("ERROR",error)
         } finally {
           this.loadingCtrl.dismiss();
         }
