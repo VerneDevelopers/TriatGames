@@ -9,12 +9,13 @@ import { MimenuComponent } from './mimenu/mimenu.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ComponentFormuComponent } from "./component-formu/component-formu.component";
 import { FinJuegoComponent } from './fin-juego/fin-juego.component';
+import { AbrirModalFinComponent } from './abrir-modal-fin/abrir-modal-fin.component';
 
 
 
 @NgModule({
-  declarations: [MiheaderComponent,MimenuComponent,ComponentFormuComponent, FinJuegoComponent],
-  exports: [MimenuComponent,MiheaderComponent,ComponentFormuComponent, FinJuegoComponent],
+  declarations: [MiheaderComponent,MimenuComponent,ComponentFormuComponent, FinJuegoComponent, AbrirModalFinComponent],
+  exports: [MimenuComponent,MiheaderComponent,ComponentFormuComponent, FinJuegoComponent, AbrirModalFinComponent],
   imports: [
     CommonModule,
     IonicModule,

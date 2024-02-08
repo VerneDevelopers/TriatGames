@@ -13,8 +13,7 @@ export class FinJuegoComponent implements OnInit {
   resultadoString: string = "";
 
   constructor(
-    private modalController: ModalController,
-    private router: Router
+    private modalController: ModalController
   ) { }
 
   dismissModal() {

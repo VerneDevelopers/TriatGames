@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ModalController, IonRouterOutlet } from '@ionic/angular';
-import { FinJuegoComponent } from '../components/fin-juego/fin-juego.component';
 
 @Component({
   selector: 'app-home',
@@ -9,21 +7,17 @@ import { FinJuegoComponent } from '../components/fin-juego/fin-juego.component';
 })
 export class HomePage {
 
-  constructor(
-    private modalController: ModalController,
-    private routerOutlet: IonRouterOutlet
-  ) {}
+  abrirModal = false;
+  resultado = "ganado";
 
-  async abrirModal() {
-    const modal = await this.modalController.create({
-      component: FinJuegoComponent,
-      componentProps: {
-        resultado: true,
-      },
-      canDismiss: true,
-      presentingElement: this.routerOutlet.nativeEl
-    });
+  constructor() {}
 
-    return await modal.present();
+  abrirFinDelJuego() {
+    if (!this.abrirModal) {
+      this.abrirModal = true;
+    } else {
+      this.abrirModal = false;
+    }
+    console.log(this.abrirModal)
   }
 }
