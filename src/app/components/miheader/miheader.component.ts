@@ -8,25 +8,31 @@ import { sha256 } from 'js-sha256';
 })
 export class MiheaderComponent  implements OnInit {
 
-  usuario : string = "manueljesus.casado.gomez.alu@iesjulioverne.es"
+  usuario : string = "manueljesus.casado.gomez.alu@iesjulioverne.e"
+  gravatarURL: string = '';
+  avatarURL: string = '';
 
   getGravatarURL(email: string): string {
-    // Trim leading and trailing whitespace from
-    // an email address and force all characters
-    // to lower case
     const address = email.trim().toLowerCase();
-
-    // Create a SHA256 hash of the final string
     const hash = sha256(address);
-
-    // Grab the actual image URL
-    return `https://www.gravatar.com/avatar/${hash}`;
+    return `https://www.gravatar.com/avatar/${hash}?d=${this.avatarURL}`;
+  }
+  avatarPrimeraLetra(){
+    const primeraLetra = this.usuario.substring(0, 1)
+    const urlSinEncode= `https://ui-avatars.com/api/?name=${primeraLetra}&background=0D8ABC&color=fff&size=128`
+    //cambiar loclhost con variable de enviroment 
+    const encodedURL = encodeURIComponent("http://localhost:8100/assets/icon/favicon.png")
+    console.log(encodedURL)
+    return encodedURL
   }
   
-  constructor() { 
-    
+  constructor() {}
+
+  ngOnInit() {
+    this.avatarURL= this.avatarPrimeraLetra()
+    this.gravatarURL = this.getGravatarURL(this.usuario);
   }
 
-  ngOnInit() {}
+
 
 }
