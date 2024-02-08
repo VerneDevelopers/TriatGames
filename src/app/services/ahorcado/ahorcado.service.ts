@@ -11,11 +11,17 @@ export class AhorcadoService {
   constructor(private afs: AngularFirestore, private firestore: Firestore) { }
 
   addJugada(userId:string, letra:string, fecha:Date) {
-    const documentRef = doc(collection(this.firestore, `users/${userId}/Ahorcado`));
+    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+  };
+  
+  const fechaFormato: string = fecha.toLocaleString("en-EN", opcionesDeFormato);
+    const documentRef = doc(collection(this.firestore, `${userId}/Ahorcado/${fechaFormato}/`));
 
     const data = {
-        letra,
-        fecha
+        letra
     };
 
     return setDoc(documentRef, data);
