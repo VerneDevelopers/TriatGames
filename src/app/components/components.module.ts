@@ -13,14 +13,15 @@ import { MimenuComponent } from './mimenu/mimenu.component';
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ComponentFormuComponent } from "./component-formu/component-formu.component";
+import { AvatarComponent } from './avatar/avatar.component';
 
 
 
 
 @NgModule({
 
-  declarations: [MiheaderComponent,MimenuComponent,ComponentFormuComponent,WordleRowComponent],
-  exports: [MimenuComponent,MiheaderComponent,ComponentFormuComponent,WordleRowComponent],
+  declarations: [MiheaderComponent,MimenuComponent,ComponentFormuComponent,WordleRowComponent, AvatarComponent],
+  exports: [MimenuComponent,MiheaderComponent,ComponentFormuComponent,WordleRowComponent, AvatarComponent],
   imports: [
     CommonModule,
     IonicModule,
