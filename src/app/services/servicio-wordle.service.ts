@@ -83,16 +83,15 @@ export class ServicioWordleService {
     return palabra;
   }
 
-  addJugada(idUser: string, fecha: string, palabra: string): Promise<void> {
+  addJugada(userId:string, palabra:string, fecha: string) {
+    const documentRef = doc(collection(this.firestore, `${userId}/Wordle/${fecha}/`));
 
-    palabra = palabra.toUpperCase()
+    const data = {
+        palabra
+    };
 
-    
-
-    const document = doc(collection(this.firestore, `${idUser}/${fecha}`));
-    return setDoc(document, { palabra: palabra });
-
-  }
+    return setDoc(documentRef, data);
+}
 
   misJugadas(idUser: string, fecha: string): Observable<any[]> {
     const document = collection(this.firestore, `${idUser}`);

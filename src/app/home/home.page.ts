@@ -10,7 +10,7 @@ export class HomePage {
 
   constructor(private servi : ServicioWordleService) {}
 
-  /*ngOnInit() {
+  ngOnInit() {
     
   }
 
@@ -20,7 +20,7 @@ export class HomePage {
     var fecha = "04-02-2024"
     
     this.servi.addJugada(idUser, palabra, fecha)
-  }*/
+  }
 
   fecha() {
     const opcionesDeFormato: Intl.DateTimeFormatOptions = {
