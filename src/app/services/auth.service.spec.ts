@@ -4,11 +4,14 @@ import { AuthService } from './auth.service';
 import {
   Auth,
 } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(() => {
+   
     TestBed.configureTestingModule({
       providers: [
 
@@ -21,9 +24,48 @@ describe('AuthService', () => {
             }
           },
        
+        },        {
+          provide: AngularFireModule,
+          useValue: {
+            collection: () => {
+              return {
+                valueChanges: () => {
+                  return {
+                    subscribe: () => {
+                      return {
+                        unsubscribe: () => {
+                          return;
+                        }
+                      };
+                    }
+                  };
+                }
+              };
+            }
+          }
+        },
+        {
+          provide: AngularFirestore,
+          useValue: {
+            collection: () => {
+              return {
+                valueChanges: () => {
+                  return {
+                    subscribe: () => {
+                      return {
+                        unsubscribe: () => {
+                          return;
+                        }
+                      };
+                    }
+                  };
+                }
+              };
+            }
+          }
         }
       ]
-
+ 
     });
     service = TestBed.inject(AuthService);
   });

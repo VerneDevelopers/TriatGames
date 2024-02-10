@@ -18,7 +18,7 @@ describe('MimenuComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
+  it('should create mimenu', () => {
     expect(component).toBeTruthy();
   });
 });
