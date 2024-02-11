@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ServicioWordleService } from './servicio-wordle.service';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('ServicioWordleService', () => {
   let service: ServicioWordleService;
@@ -10,7 +10,7 @@ describe('ServicioWordleService', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: AngularFirestore,
+          provide: Firestore,
           useValue: {
             collection: () => {
               return {
