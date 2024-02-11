@@ -7,17 +7,17 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  abrirModal = false;
-  resultado = "ganado";
+  /* abrirModal = false;
+  resultado = "ganado"; */
 
   constructor() {}
 
-  abrirFinDelJuego() {
+  /* abrirFinDelJuego() {
     if (!this.abrirModal) {
       this.abrirModal = true;
     } else {
       this.abrirModal = false;
     }
     console.log(this.abrirModal)
-  }
+  } */
 }
