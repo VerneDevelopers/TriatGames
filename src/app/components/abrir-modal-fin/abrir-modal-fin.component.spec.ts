@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
+import { IonRouterOutlet, IonicModule } from '@ionic/angular';
 
 import { AbrirModalFinComponent } from './abrir-modal-fin.component';
 
@@ -8,9 +8,20 @@ describe('AbrirModalFinComponent', () => {
   let fixture: ComponentFixture<AbrirModalFinComponent>;
 
   beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+    TestBed.configureTestingModule(
+      {
       declarations: [ AbrirModalFinComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),
+        
+      ],
+      providers: [
+        {
+          provide: IonRouterOutlet,
+          useValue: {
+            nativeEl: "",
+           
+          }
+        }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AbrirModalFinComponent);
