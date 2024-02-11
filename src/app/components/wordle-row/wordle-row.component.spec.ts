@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MimenuComponent } from './mimenu.component';
+import { WordleRowComponent } from './wordle-row.component';
 
-describe('MimenuComponent', () => {
-  let component: MimenuComponent;
-  let fixture: ComponentFixture<MimenuComponent>;
+describe('WordleRowComponent', () => {
+  let component: WordleRowComponent;
+  let fixture: ComponentFixture<WordleRowComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MimenuComponent ],
+      declarations: [ WordleRowComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MimenuComponent);
+    fixture = TestBed.createComponent(WordleRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
 
-  it('should create mimenu', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
