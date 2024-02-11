@@ -1,5 +1,11 @@
+
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
@@ -8,15 +14,29 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
-    path: 'bernat',
-    loadChildren: () => import('./pages/bernat/bernat.module').then( m => m.BernatPageModule)
-  },{    path: 'manucasado',
-    loadChildren: () => import('./pages/manucasado/manucasado.module').then( m => m.ManucasadoPageModule)
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
+
+  {
+    path: 'ahorcado',
+    loadChildren: () => import('./pages/ahorcado/ahorcado.module').then( m => m.AhorcadoPageModule)
+  },
+
+   {
+    path: 'trivial',
+    loadChildren: () => import('./pages/trivial/trivial.module').then( m => m.TrivialPageModule)
+  },
+
+  {
+    path: 'wordle',
+    loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule)
+  }
+
 ];
 
 @NgModule({
@@ -26,3 +46,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
