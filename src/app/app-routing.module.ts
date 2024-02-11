@@ -32,6 +32,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/trivial/trivial.module').then( m => m.TrivialPageModule)
   },
 
+  {
+    path: 'wordle',
+    loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule)
+  }
+
 ];
 
 @NgModule({

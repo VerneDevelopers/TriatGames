@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
+import { WordleRowComponent } from './wordle-row/wordle-row.component';
+
+
+
 import { IonicModule } from '@ionic/angular';
 import { RouterLink } from '@angular/router';
 import { MiheaderComponent } from './miheader/miheader.component';
@@ -13,15 +18,17 @@ import { AbrirModalFinComponent } from './abrir-modal-fin/abrir-modal-fin.compon
 
 
 
+
 @NgModule({
-  declarations: [MiheaderComponent,MimenuComponent,ComponentFormuComponent, FinJuegoComponent, AbrirModalFinComponent],
-  exports: [MimenuComponent,MiheaderComponent,ComponentFormuComponent, FinJuegoComponent, AbrirModalFinComponent],
+  declarations: [MiheaderComponent,MimenuComponent,ComponentFormuComponent,WordleRowComponent, FinJuegoComponent, AbrirModalFinComponent],
+  exports: [MimenuComponent,MiheaderComponent,ComponentFormuComponent,WordleRowComponent, FinJuegoComponent, AbrirModalFinComponent],
   imports: [
     CommonModule,
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
     RouterLink
+
   ]
 
 

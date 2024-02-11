@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PreguntaTrivial } from 'src/app/interfaces/pregunta-trivial';
+import { TrivialService } from 'src/app/services/trivial.service';
 
 @Component({
   selector: 'app-trivial',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrivialPage implements OnInit {
 
-  constructor() { }
+
+  
+
+  constructor() {
+    
+  }
 
   ngOnInit() {
+    
   }
+
+  
 
 }
