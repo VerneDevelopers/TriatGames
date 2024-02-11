@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
+import { ComponentsModule } from '../components/components.module';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -10,7 +11,7 @@ describe('HomePage', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomePage],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot(),ComponentsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomePage);
@@ -18,7 +19,7 @@ describe('HomePage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create home', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -12,10 +12,18 @@ import {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth) {
+   
+   }
 
   getUid() {
-    return this.auth.currentUser?.uid;
+    try   {
+      return this.auth.currentUser?.uid;
+    }
+    catch (e) {
+    //  console.log(e);
+      return null;
+    }
   }
 
   async register(email: string, password: string):Promise<UserCredential | null>{
@@ -23,7 +31,7 @@ export class AuthService {
       const user = await createUserWithEmailAndPassword(this.auth, email, password);
       return user;
     } catch (e) {
-      console.log('ha fallado el registro',e);
+    //  console.log('ha fallado el registro',e);
       return null;
     }
   }
@@ -33,7 +41,7 @@ export class AuthService {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       return user;
     } catch (e) {
-      console.log('ha fallado el login',e);
+   //   console.log('ha fallado el login',e);
       return null;
     }
   }
@@ -42,7 +50,7 @@ export class AuthService {
     try {
        await sendPasswordResetEmail(this.auth, email);
     } catch (e) {
-      console.log(e);
+    //  console.log(e);
       
     }
   }
@@ -52,7 +60,7 @@ export class AuthService {
       return signOut(this.auth);
     }
     catch (e) {
-      console.log(e);
+      // console.log(e);
       return Promise<void>;
     }
   }
