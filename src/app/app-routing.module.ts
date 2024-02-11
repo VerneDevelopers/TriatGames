@@ -36,6 +36,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/lista-test/lista-test.module').then( m => m.ListaTestPageModule)
   },
 
+  {
+    path: 'wordle',
+    loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule)
+  }
+
 ];
 
 @NgModule({
