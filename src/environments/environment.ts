@@ -5,17 +5,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyA92Ix9L9Fy7h2a5RkznCzD7jIyBOlEQgA",
 
-    authDomain: "wordle-provisional.firebaseapp.com",
-
-    projectId: "wordle-provisional",
-
-    storageBucket: "wordle-provisional.appspot.com",
-
-    messagingSenderId: "522727598219",
-
-    appId: "1:522727598219:web:b743074c177675e1584c8e"
 
   }
 

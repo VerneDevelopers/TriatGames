@@ -84,7 +84,7 @@ export class ServicioWordleService {
   }
 
   addJugada(userId:string, palabra:string, fecha: string) {
-    const documentRef = doc(collection(this.firestore, `${userId}/Wordle/${fecha}/`));
+    const documentRef = doc(collection(this.firestore, `${userId}/Wordle/${fecha}`));
 
     const data = {
         palabra
@@ -93,8 +93,8 @@ export class ServicioWordleService {
     return setDoc(documentRef, data);
 }
 
-  misJugadas(idUser: string, fecha: string): Observable<any[]> {
-    const document = collection(this.firestore, `${idUser}`);
+  misJugadas(userId: string, fecha: string): Observable<any[]> {
+    const document = collection(this.firestore, `${userId}/Wordle/${fecha}/`);
     return collectionData(document, { idField: 'id' })
       .pipe(
         map(palabras => palabras as any[])
