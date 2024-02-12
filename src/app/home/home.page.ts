@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServicioWordleService } from '../services/servicio-wordle.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,17 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  /* abrirModal = false;
+  resultado = "ganado"; */
+
   constructor() {}
 
+  /* abrirFinDelJuego() {
+    if (!this.abrirModal) {
+      this.abrirModal = true;
+    } else {
+      this.abrirModal = false;
+    }
+    console.log(this.abrirModal)
+  } */
 }
