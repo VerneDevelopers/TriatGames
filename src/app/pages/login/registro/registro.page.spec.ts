@@ -12,14 +12,11 @@ describe('RegistroPage', () => {
   let fixture: ComponentFixture<RegistroPage>;
   let service: AuthService;
 
-  beforeEach((() => {
-    TestBed.configureTestingModule({
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RegistroPage],
       imports: [IonicModule.forRoot(),ReactiveFormsModule,FormsModule,ComponentsModule],
-            providers: [
+      providers: [
         {
           provide:
             Auth,
@@ -32,9 +29,7 @@ describe('RegistroPage', () => {
         }
       ]
     });
-    
     }).compileComponents();
-    service = TestBed.inject(AuthService);
     fixture = TestBed.createComponent(RegistroPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
