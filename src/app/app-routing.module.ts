@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'trivial',
     loadChildren: () => import('./pages/trivial/trivial.module').then( m => m.TrivialPageModule)
   },
+  {
+    path: 'lista-test',
+    loadChildren: () => import('./pages/lista-test/lista-test.module').then( m => m.ListaTestPageModule)
+  },
 
   {
     path: 'wordle',
