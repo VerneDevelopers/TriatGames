@@ -8,10 +8,17 @@ import { ServicioWordleService } from '../services/servicio-wordle.service';
 })
 export class HomePage {
 
+  /* abrirModal = false;
+  resultado = "ganado"; */
+
   constructor() {}
 
-  
-
-    
-
+  /* abrirFinDelJuego() {
+    if (!this.abrirModal) {
+      this.abrirModal = true;
+    } else {
+      this.abrirModal = false;
+    }
+    console.log(this.abrirModal)
+  } */
 }
