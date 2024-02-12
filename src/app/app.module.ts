@@ -28,7 +28,7 @@ import { DatePipe } from '@angular/common';
     IonicModule.forRoot(),
     AppRoutingModule,
  
-    HttpClientModule
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     ComponentsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
