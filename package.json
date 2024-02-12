@@ -29,10 +29,6 @@
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
     "fire": "^0.55.1",
-
-    "firebase": "^10.7.2",
-    "firestore": "^1.1.6",
-
     "ionicons": "^7.0.0",
     "js-sha256": "^0.11.0",
     "rxjs": "~7.8.0",
