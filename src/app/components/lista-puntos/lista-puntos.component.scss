@@ -1,0 +1,27 @@
+ion-list {
+  background-color: gray;
+  display: flex;
+  flex-wrap: wrap; /* Varias lineas con wrap*/
+  justify-content: center; /* Horizontal en el centro*/
+}
+
+ion-card {
+  width: calc(30% - 20px); /* Ancho de la tarjeta con espacio (mj) */
+  margin: 10px; /* Espacio entre cards */
+}
+
+ion-card-header {
+  background-color: #f4f4f4; 
+}
+
+ion-card-content {
+  padding: 15px; 
+}
+
+ion-button {
+  margin-top: 20px;
+  --background: #007bff;
+  --color: #fff;
+  --border-radius: 8px;
+}
+
