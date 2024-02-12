@@ -10,35 +10,31 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 describe('LoginPage', () => {
   let component: LoginPage;
   let fixture: ComponentFixture<LoginPage>;
-  let service: AuthService;
   
 
-
+  let service: AuthService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginPage],
       imports: [IonicModule.forRoot(),ReactiveFormsModule,FormsModule,ComponentsModule],
-      providers: [
-        {
-          provide:
-            Auth,
-          useValue: {
-            currentUser: {
-              uid: 'test-uid'
-            }
-          },
-       
+      providers:[{
+        provide:
+        Auth,
+      useValue: {
+        currentUser: {
+          uid: 'test-uid'
         }
-      ]
-    });
+      }
+      }]
     }).compileComponents();
     fixture = TestBed.createComponent(LoginPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-
   it('should create login', () => {
     expect(component).toBeTruthy();
   });
 });
+
+
