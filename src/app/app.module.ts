@@ -14,7 +14,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ComponentsModule } from './components/components.module';
+import { HttpClientModule } from '@angular/common/http';
+
 import { DatePipe } from '@angular/common';
+
 
 
 
@@ -24,6 +27,8 @@ import { DatePipe } from '@angular/common';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+ 
+    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     ComponentsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
@@ -37,4 +42,4 @@ import { DatePipe } from '@angular/common';
 
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

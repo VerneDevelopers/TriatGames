@@ -7,12 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MiheaderComponent  implements OnInit {
 
-  usuario : string = "Alex@gmail.com"
-  
-  constructor() { 
-    
+  constructor() {}
+
+  ngOnInit() {
   }
-
-  ngOnInit() {}
-
 }

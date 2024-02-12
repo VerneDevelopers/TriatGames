@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home.page';
 import { ComponentsModule } from '../components/components.module';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('HomePage', () => {
   let component: HomePage;
@@ -11,7 +12,8 @@ describe('HomePage', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomePage],
-      imports: [IonicModule.forRoot(),ComponentsModule]
+      imports: [IonicModule.forRoot(),ComponentsModule],
+      providers:[HttpClient,HttpHandler]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomePage);

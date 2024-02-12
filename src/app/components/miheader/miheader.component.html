@@ -7,7 +7,10 @@
     </ion-buttons>
     <!--Saludo al usuario-->
     <!--Pendiente de implementar completamente con FireBase-->
-    <ion-title>Hola {{usuario}}</ion-title>
+    <ion-title>
+      <app-avatar [correo]="'manueljesus.casado.gomez.alu@iesjulioverne.e'"></app-avatar>
+      <!-- Hola {{usuario}} -->
+    </ion-title>
     <!--Botón de deslogueo pendiente de implementar-->
     <ion-button slot="end"><ion-icon name="log-out-outline"></ion-icon></ion-button>
   </ion-toolbar>
