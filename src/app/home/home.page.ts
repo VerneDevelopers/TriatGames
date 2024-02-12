@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ServicioWordleService } from '../services/servicio-wordle.service';
 
 @Component({
   selector: 'app-home',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
 export class HomePage {
 
   constructor() {}
+
+  
+
+    
 
 }

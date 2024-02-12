@@ -12,6 +12,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
 import { ComponentsModule } from './components/components.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { DatePipe } from '@angular/common';
@@ -34,6 +35,7 @@ import { DatePipe } from '@angular/common';
   ],
   //Aquí añado DatePipe para formatear fechas
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },DatePipe],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {}
