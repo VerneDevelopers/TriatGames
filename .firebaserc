@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "wordle-provisional": {
+      "hosting": {
+        "app": [
+          "wordle-provisional"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "wordle-provisional"
+  }
+}
