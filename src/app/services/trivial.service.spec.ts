@@ -1,30 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AuthService } from './auth.service';
-import {
-  Auth,
-} from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { TrivialService } from './trivial.service';
 import { AngularFireModule } from '@angular/fire/compat';
+import { DatePipe } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
-describe('AuthService', () => {
-  let service: AuthService;
+describe('TrivialService', () => {
+  let service: TrivialService;
 
   beforeEach(() => {
-   
     TestBed.configureTestingModule({
-      providers: [
-
+      providers: [ 
+        DatePipe,
         {
-          provide:
-            Auth,
-          useValue: {
-            currentUser: {
-              uid: 'test-uid'
-            }
-          },
-       
-        },        {
           provide: AngularFireModule,
           useValue: {
             collection: () => {
@@ -65,37 +53,11 @@ describe('AuthService', () => {
           }
         }
       ]
- 
     });
-    service = TestBed.inject(AuthService);
+    service = TestBed.inject(TrivialService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-  it('should return the current user uid', () => {
-    expect(service.getUid()).toEqual('test-uid');
-  });
-  it('should register a new user', async () => {
-    const user = await service.register('bernat', '123456');
-    console.log("register:", user);
-    expect('test-uid').toEqual('test-uid');
-  });
-  it('should login a user', async () => {
-    const user = await service.login( 'bernat',  '123456' );
-    console.log("login:", user);
-    expect('test-uid').toEqual('test-uid');
-
-  }
-  );
-  it('should reset the password', async () => {
-    await service.resetPassword('bernat');
-    expect('test-uid').toEqual('test-uid');
-  });
-  it('should logout the user', async () => {
-    await service.logout();
-    expect('test-uid').toEqual('test-uid');
-  });
-
-
 });

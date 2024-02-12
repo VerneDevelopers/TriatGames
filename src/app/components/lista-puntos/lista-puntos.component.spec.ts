@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MimenuComponent } from './mimenu.component';
+import { ListaPuntosComponent } from './lista-puntos.component';
 
-describe('MimenuComponent', () => {
-  let component: MimenuComponent;
-  let fixture: ComponentFixture<MimenuComponent>;
+describe('ListaPuntosComponent', () => {
+  let component: ListaPuntosComponent;
+  let fixture: ComponentFixture<ListaPuntosComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ MimenuComponent ],
+      declarations: [ ListaPuntosComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MimenuComponent);
+    fixture = TestBed.createComponent(ListaPuntosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
 
-  it('should create mimenu', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });
