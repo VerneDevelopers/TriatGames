@@ -6,3 +6,4 @@ export interface TiradaTrivial {
     respuesta: string;
     esCorrecta: boolean;
 }
+ 
