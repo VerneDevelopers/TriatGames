@@ -25,7 +25,6 @@ export class TrivialPage implements OnInit {
 
   ionViewWillEnter() {
     this.obtenerPreguntas();
-    console.log('LAS PREGUNTAS SON: ' + this.preguntas);
   }
 
   obtenerPreguntas(){
@@ -35,10 +34,11 @@ export class TrivialPage implements OnInit {
         this.preguntas = res;
         this.pregunta = this.preguntas[1]
         console.log(this.pregunta);
+        this.respuestas = this.pregunta.respuestas;
+        console.log(this.pregunta.indiceRespuesta); 
+
       },
       error: (error:any) =>{
-
-
       }
 
     })
