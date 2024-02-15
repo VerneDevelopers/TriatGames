@@ -16,10 +16,10 @@ export class TrivialService {
   formatoFecha: string = 'dd/MM/yyyy'
 
   constructor(private firestore: AngularFirestore, private datePipe: DatePipe) { }
+ 
 
-
-  getPreguntas(): Observable<PreguntaTrivial[]> {
-    return this.firestore.collection('trivialPreguntas').doc("bateriaPreguntas").collection<PreguntaTrivial>("1").valueChanges();
+  getPreguntas(dia:string): Observable<PreguntaTrivial[]> {
+    return this.firestore.collection('trivialPreguntas').doc("bateriaPreguntas").collection<PreguntaTrivial>(dia).valueChanges();
   }
   
   //DatePipe sirve para dar formato a las fechas
