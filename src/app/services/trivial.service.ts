@@ -43,6 +43,8 @@ export class TrivialService {
     console.log("getJugada", documento.collection<TiradaTrivial[]>(fecha.replace(/\//g, "")!).valueChanges());
     return documento.collection<TiradaTrivial[]>(fecha.replace(/\//g, "")!).valueChanges();
   }
+
+  
 }
 
 

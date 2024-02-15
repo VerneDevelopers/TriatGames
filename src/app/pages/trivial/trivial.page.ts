@@ -42,7 +42,6 @@ export class TrivialPage implements OnInit {
         //Almacenamos las respuestas en el array respuestas
         this.respuestas = this.pregunta.respuestas;
         console.log(this.pregunta.indiceRespuesta); 
-
       },
       error: (error:any) =>{
       }
@@ -62,12 +61,16 @@ export class TrivialPage implements OnInit {
   responder(r:string){
     this.numeroIntentos = this.numeroIntentos + 1;
     console.log('Has respondido con la opcion: ' + r + ' Intentos: ' + this.numeroIntentos)
+<<<<<<< HEAD
     //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
     if(this.numeroIntentos>1){
       this.numeroIntentos = 0;
     }
     //Volvemos a llamar la funcion obtenerPreguntas() para recargar las pregutnas
     this.obtenerPreguntas()
+=======
+  }
+>>>>>>> 4b0437287b6410125db1eeae42518d357374c236
 
     //Falta verificar que la respuesta es correcta o incorrecta
     //Añadir la respuesta a firebase
