@@ -36,7 +36,6 @@ export class TrivialPage implements OnInit {
         console.log(this.pregunta);
         this.respuestas = this.pregunta.respuestas;
         console.log(this.pregunta.indiceRespuesta); 
-
       },
       error: (error:any) =>{
       }
@@ -47,7 +46,6 @@ export class TrivialPage implements OnInit {
   responder(r:string){
     this.numeroIntentos = this.numeroIntentos + 1;
     console.log('Has respondido con la opcion: ' + r + ' Intentos: ' + this.numeroIntentos)
-    
   }
 
 }
