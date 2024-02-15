@@ -8,18 +8,18 @@ import { TrivialService } from 'src/app/services/trivial.service';
   styleUrls: ['./trivial.page.scss'],
 })
 export class TrivialPage implements OnInit {
- 
-  preguntas:PreguntaTrivial[];
-  pregunta:PreguntaTrivial= {} as PreguntaTrivial ;
-  respuestas:string[] = ['respuesta1', 'respuesta2', 'respuesta3', 'respuesta4'];
-  numeroIntentos:number=0;
-  diaSemana='1';
+
+  preguntas: PreguntaTrivial[];
+  pregunta: PreguntaTrivial = {} as PreguntaTrivial;
+  respuestas: string[] = ['respuesta1', 'respuesta2', 'respuesta3', 'respuesta4'];
+  numeroIntentos: number = 0;
+  diaSemana = '1';
 
   constructor(
-    private trivialSvc: TrivialService, 
-    ) {
-      this.preguntas = [] ; 
-     }
+    private trivialSvc: TrivialService,
+  ) {
+    this.preguntas = [];
+  }
 
   ngOnInit() {
   }
@@ -27,10 +27,10 @@ export class TrivialPage implements OnInit {
   ionViewWillEnter() {
     this.obtenerDia();
     this.obtenerPreguntas();
-    
+
   }
 
-  obtenerPreguntas(){
+  obtenerPreguntas() {
     this.trivialSvc.getPreguntas(this.diaSemana).subscribe({
       next: (res: any) => {
         console.log(res);
@@ -41,40 +41,35 @@ export class TrivialPage implements OnInit {
         console.log(this.pregunta);
         //Almacenamos las respuestas en el array respuestas
         this.respuestas = this.pregunta.respuestas;
-        console.log(this.pregunta.indiceRespuesta); 
+        console.log(this.pregunta.indiceRespuesta);
       },
-      error: (error:any) =>{
+      error: (error: any) => {
       }
 
     })
   }
 
   /*------Chapucilla-------*/
-  obtenerDia(){
+  obtenerDia() {
     //Obtenemos la fecha actual
     const fechaActual = new Date();
     //Para obtener el dia y almacenarlo como un string
-    this.diaSemana = fechaActual.getDay().toString(); 
-    console.log('hola '+ this.diaSemana )
+    this.diaSemana = fechaActual.getDay().toString();
+    console.log('hola ' + this.diaSemana)
   }
 
-  responder(r:string){
+  responder(r: string) {
     this.numeroIntentos = this.numeroIntentos + 1;
     console.log('Has respondido con la opcion: ' + r + ' Intentos: ' + this.numeroIntentos)
-<<<<<<< HEAD
     //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
-    if(this.numeroIntentos>1){
+    if (this.numeroIntentos > 1) {
       this.numeroIntentos = 0;
     }
     //Volvemos a llamar la funcion obtenerPreguntas() para recargar las pregutnas
     this.obtenerPreguntas()
-=======
   }
->>>>>>> 4b0437287b6410125db1eeae42518d357374c236
-
-    //Falta verificar que la respuesta es correcta o incorrecta
-    //Añadir la respuesta a firebase
-    //Mostrar un mensaje al usuario
-    //Añadir color segun la categoria   
-  }
+  //Falta verificar que la respuesta es correcta o incorrecta
+  //Añadir la respuesta a firebase
+  //Mostrar un mensaje al usuario
+  //Añadir color segun la categoria   
 }
