@@ -2,22 +2,24 @@
   <ion-toolbar>
     <ion-title>Ahorcado</ion-title>
   </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true" class="ion-padding">
+ </ion-header>
+ <!---->
+ <ion-content [fullscreen]="true" class="ion-padding">
   <div class="ion-text-center">
     <img src="../../assets/imgAhorcado/8B.png" height="100px" class="ion-margin-bottom">
     <ion-grid>
       <ion-row>
         <ion-col size="8">
-          <ion-input placeholder="Letra" class="input"></ion-input>
+          <!-- Cambio esto para que solo se pueda introducir una letra y no explote el servicio -->
+          <ion-input placeholder="Letra" class="input" [(ngModel)]="letra" type="text" maxlength="1"></ion-input>
         </ion-col>
         <ion-col size="4">
-          <ion-button expand="full" shape="round">Click</ion-button>
+          <ion-button expand="full" shape="round" (click)="addLetra()">Click</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
-
+ 
+ 
     <ion-list>
       <ion-item>
         <ion-label>Letras introducidas</ion-label>
@@ -27,4 +29,5 @@
       </ion-item>
     </ion-list>
   </div>
-</ion-content>
+ </ion-content>
+ 
