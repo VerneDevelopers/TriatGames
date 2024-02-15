@@ -39,6 +39,10 @@ const routes: Routes = [
   {
     path: 'wordle',
     loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule)
+  },
+  {
+    path: 'puntuaciones',
+    loadChildren: () => import('./pages/puntuaciones/puntuaciones.module').then( m => m.PuntuacionesPageModule)
   }
 
 ];

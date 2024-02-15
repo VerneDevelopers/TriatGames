@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Puntuaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-title class="ion-text-center">Ranking</ion-title>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" [disabled]="activeD" (click)="activarD()">Dia</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full"  [disabled]="activeM" (click)="activarM()">Mes</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full"  [disabled]="activeA" (click)="activarA()">Año</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-lista-puntos [listaEntrada]="listaDesordenada"></app-lista-puntos>
+</ion-content>
