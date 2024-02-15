@@ -72,9 +72,6 @@ export class TrivialPage implements OnInit {
     //Falta verificar que la respuesta es correcta o incorrecta
     //Añadir la respuesta a firebase
     //Mostrar un mensaje al usuario
-    //Añadir color segun la categoria
-
-    
+    //Añadir color segun la categoria   
   }
-
 }
