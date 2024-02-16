@@ -74,7 +74,6 @@ export class TrivialPage implements OnInit {
     if (this.numeroIntentos > 1) {
       this.numeroIntentos = 0;
     }
-
     //Volvemos a llamar la funcion obtenerPreguntas() para recargar las pregutnas
     this.obtenerPreguntas()
     
@@ -89,10 +88,13 @@ export class TrivialPage implements OnInit {
         console.log('no hay holita')
       }
   }
-  //Falta verificar que la respuesta es correcta o incorrecta check
+  //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
+  //Falta verificar que la respuesta es correcta o incorrecta --> check
   //Añadir la respuesta a firebase
   //Mostrar un mensaje al usuario
   //Añadir color segun la categoria   
   //Que hacer cuando se acierta y se falla
   //Cuando terminan las preguntas que se hace?
+  //Hacer un loading al empezar la pagina hasta que recargue las preguntas
+  
 }
