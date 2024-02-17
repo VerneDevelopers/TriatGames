@@ -14,6 +14,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+import { DatePipe } from '@angular/common';
+
 
 
 @NgModule({
@@ -22,15 +25,17 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-ComponentsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
+    ComponentsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    DatePipe
   ],
 
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, DatePipe],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +13,7 @@ export class LoginPage implements OnInit {
     password: new FormControl('', [Validators.required]),
   })
 
-  constructor(private serv: ScoreService) {
-    this.serv.getPuntuacion().subscribe((s) => {
-      console.log(s)
-    }
-    )
+  constructor() {
   }
 
   ngOnInit() {
