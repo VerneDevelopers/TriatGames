@@ -39,6 +39,10 @@ const routes: Routes = [
   {
     path: 'wordle',
     loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule)
+  },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
   }
 
 ];
