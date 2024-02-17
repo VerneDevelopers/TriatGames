@@ -10,18 +10,17 @@ import { IPuntuacion } from '../interfaces/i-puntuacion';
 export class HomePage {
 
   constructor(private serv: ScoreService) {
+    
+    //Ejemplo de añadir puntos
+    //------------------------------------------
+    //¡¡SE DEBEN DE EJECUTAR 1 A 1 ALSER SUSCRIPCIONES!!
+    //------------------------------------------
     // this.serv.addPoints("Manu", new Date(), "Wordle", true)
     // this.serv.addPoints("Manu", new Date(), "Ahorcado", false)
     // this.serv.addPoints("Manu", new Date(), "Trivial", true)
     // this.serv.addPoints("Bernat", new Date(), "Wordle", false)
     // this.serv.addPoints("Bernat", new Date(), "Ahorcado", true)
-    //this.serv.addPoints("Bernat", new Date(), "Trivial", false)
-    //console.log("entro", "entro")
-    // this.serv.getPointDiaUser(new Date(), "Bernat").subscribe(
-    //   resp =>{
-    //     console.log(resp);
-    //   }
-    // )
+    // this.serv.addPoints("Bernat", new Date(), "Trivial", false)
 
     //Ejemplo de scoreDay
     //------------------------------------------

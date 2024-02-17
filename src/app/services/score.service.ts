@@ -23,71 +23,83 @@ export class ScoreService {
 
 
   //addPoints(idusuario,fecha,idJuego,ganador/perdedor)
-  addPoints(idUsuario: string, fecha: Date, idJuego: string, ganado: Boolean) {
+  addPoints(idUsuario: string, fecha: Date, idJuego: string, ganado: boolean) {
     const fechaHoy = this.datePipe.transform(fecha, this.formatoFecha)?.replace(/\//g, "")!;
-    const idSemana = this.obtenerRangoDeSemana(fecha)
-    let puntosGanados: number = 0
-    if (ganado) {
-      puntosGanados = 3
-    } else {
-      puntosGanados = 1
-    }
+    const idSemana = this.obtenerRangoDeSemana(fecha);
+    const puntosGanados = ganado ? 3 : 1;
+
     const colecciones = [
-      this.afs.collection(`puntuaciones/diaria/${fechaHoy}`),
-      this.afs.collection(`puntuaciones/semanal/${idSemana}`),
-      this.afs.collection(`puntuaciones/global/histórico`)
+      `puntuaciones/diaria/${fechaHoy}`,
+      `puntuaciones/semanal/${idSemana}`,
+      `puntuaciones/global/histórico`
     ];
 
-    let puntuacionDiaria: IPuntuacion = this.puntuacionVacia
-    let puntuacionSemanal: IPuntuacion = this.puntuacionVacia
-    let puntuacionGlobal: IPuntuacion = this.puntuacionVacia
+    colecciones.forEach(coleccion => {
+      const documentRef = this.afs.collection(coleccion).doc(idUsuario);
 
-    this.getPointDiaUser(fecha, idUsuario).subscribe(resp1 => {
-      puntuacionDiaria = resp1;
-      console.log("resp1", resp1)
-      this.getPointSemUser(idSemana, idUsuario).subscribe(resp2 => {
-        puntuacionSemanal = resp2
-        this.getPointGlobUser(idUsuario).subscribe(resp3 => {
-          puntuacionGlobal = resp3
-          const puntuaciones = [puntuacionDiaria, puntuacionSemanal, puntuacionGlobal]
-          console.log("puntuaciones", puntuaciones)
-          // colecciones.forEach((it, ind) => {
-          //     let puntuacion = puntuaciones[ind]
-          // switch (idJuego) {
-          //   case "Wordle":
-          //     puntuacion.ptsWordle = puntosGanados;
-          //     break;
-          //   case "Ahorcado":
-          //     puntuacion.ptsAhorcado = puntosGanados;
-          //     break;
-          //   case "Trivial":
-          //     puntuacion.ptsTrivial = puntosGanados;
-          //     break;
-          //   default:
-          //     console.log("Número desconocido");
-          // }
-          //   puntuacion.ptsTotales += puntosGanados;
-          // it.doc(idUsuario).set(this.puntuacionVacia);
-          // })
-        })
-      })
-    })
+      documentRef.get().subscribe(snapshot => {
+        const puntuacion: IPuntuacion = snapshot.data() as IPuntuacion || this.puntuacionVacia;
+
+
+        switch (idJuego) {
+          case "Wordle":
+            puntuacion.ptsWordle = puntosGanados;
+            break;
+          case "Ahorcado":
+            puntuacion.ptsAhorcado = puntosGanados;
+            break;
+          case "Trivial":
+            puntuacion.ptsTrivial = puntosGanados;
+            break;
+          default:
+            console.log("Juego desconocido");
+            return;
+        }
+        puntuacion.idUsuario = idUsuario;
+        puntuacion.ptsTotales += puntosGanados;
+
+        this.afs.collection(coleccion).doc(idUsuario).set(puntuacion);
+      });
+    });
   }
 
   // ScoreDay(fecha) -> lista de usuarios y puntos de ese dia
-  scoreDay(fecha: Date):Observable<IPuntuacion[]>{
+  scoreDay(fecha: Date): Observable<IPuntuacion[]> {
     const fechaHoy = this.datePipe.transform(fecha, this.formatoFecha)?.replace(/\//g, "")!;
     return this.afs.collection<IPuntuacion>(`puntuaciones/diaria/${fechaHoy}`).valueChanges();
   }
   // ScoreWeek(fechaInicio) -> lista de esa semana
-  scoreWeek(fecha : Date):Observable<IPuntuacion[]>{
+  scoreWeek(fecha: Date): Observable<IPuntuacion[]> {
     const idSemana = this.obtenerRangoDeSemana(fecha)
     return this.afs.collection<IPuntuacion>(`puntuaciones/semanal/${idSemana}`).valueChanges();
   }
   // ScoreWorld()-> lista total
-  scoreWorld():Observable<IPuntuacion[]>{
+  scoreWorld(): Observable<IPuntuacion[]> {
     return this.afs.collection<IPuntuacion>(`puntuaciones/global/histórico`).valueChanges();
   }
+
+  //Funcion para obtener el id de la coleccion para los puntos semanales
+  obtenerRangoDeSemana(fecha: Date): string {
+    const inicioSemana = new Date(fecha);
+    inicioSemana.setDate(fecha.getDate() - fecha.getDay() + (fecha.getDay() === 0 ? -6 : 1));
+    inicioSemana.setHours(0, 0, 0, 0);
+
+    const finSemana = new Date(inicioSemana);
+    finSemana.setDate(inicioSemana.getDate() + 6);
+    finSemana.setHours(0, 0, 0, 0);
+
+    const formatoInicio = `${inicioSemana.getDate()}${inicioSemana.getMonth() + 1}${inicioSemana.getFullYear()}`;
+    const formatoFin = `${finSemana.getDate()}${finSemana.getMonth() + 1}${finSemana.getFullYear()}`;
+
+    return `${formatoInicio}_${formatoFin}`;
+  }
+
+  /*
+  --------------------------------------------------------------------------------------------------------------
+  ||                                                                                                          ||
+  ||      Uno de los muchos intentos fallidos para actualizar todas las puntuaciones                          ||
+  ||                                                                                                          ||
+  --------------------------------------------------------------------------------------------------------------
 
   getPointDiaUser(fecha: Date, idUsuario: string): Observable<IPuntuacion> {
     const fechaHoy = this.datePipe.transform(fecha, this.formatoFecha)?.replace(/\//g, "")!;
@@ -140,20 +152,6 @@ export class ScoreService {
       )
     )
   };
+*/
 
-  //Funcion para obtener el id de la coleccion para los puntos semanales
-  obtenerRangoDeSemana(fecha: Date): string {
-    const inicioSemana = new Date(fecha);
-    inicioSemana.setDate(fecha.getDate() - fecha.getDay() + (fecha.getDay() === 0 ? -6 : 1));
-    inicioSemana.setHours(0, 0, 0, 0);
-
-    const finSemana = new Date(inicioSemana);
-    finSemana.setDate(inicioSemana.getDate() + 6);
-    finSemana.setHours(0, 0, 0, 0);
-
-    const formatoInicio = `${inicioSemana.getDate()}${inicioSemana.getMonth() + 1}${inicioSemana.getFullYear()}`;
-    const formatoFin = `${finSemana.getDate()}${finSemana.getMonth() + 1}${finSemana.getFullYear()}`;
-
-    return `${formatoInicio}_${formatoFin}`;
-  }
 }
