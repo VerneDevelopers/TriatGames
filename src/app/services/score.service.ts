@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { Observable, catchError, filter, forkJoin, map, of } from 'rxjs';
 import { IPuntuacion } from '../interfaces/i-puntuacion';
-import { IPuntuaciones } from '../interfaces/i-puntuaciones';
 
 @Injectable({
   providedIn: 'root'
@@ -93,65 +92,4 @@ export class ScoreService {
 
     return `${formatoInicio}_${formatoFin}`;
   }
-
-  /*
-  --------------------------------------------------------------------------------------------------------------
-  ||                                                                                                          ||
-  ||      Uno de los muchos intentos fallidos para actualizar todas las puntuaciones                          ||
-  ||                                                                                                          ||
-  --------------------------------------------------------------------------------------------------------------
-
-  getPointDiaUser(fecha: Date, idUsuario: string): Observable<IPuntuacion> {
-    const fechaHoy = this.datePipe.transform(fecha, this.formatoFecha)?.replace(/\//g, "")!;
-    const documentRef = this.afs.collection(`puntuaciones/diaria/${fechaHoy}`).doc<IPuntuacion>(idUsuario);
-
-    return documentRef.valueChanges().pipe(
-      map(doc => {
-        if (doc) {
-          return doc;
-        } else {
-          let puntuacion = this.puntuacionVacia
-          puntuacion.idUsuario = idUsuario
-          return puntuacion
-        }
-      }
-      )
-    )
-  };
-
-  getPointSemUser(idSemana: string, idUsuario: string): Observable<IPuntuacion> {
-    const documentRef = this.afs.collection(`puntuaciones/semanal/${idSemana}`).doc<IPuntuacion>(idUsuario);
-
-    return documentRef.valueChanges().pipe(
-      map(doc => {
-        if (doc) {
-          return doc;
-        } else {
-          let puntuacion = this.puntuacionVacia
-          puntuacion.idUsuario = idUsuario
-          return puntuacion
-        }
-      }
-      )
-    )
-  };
-
-  getPointGlobUser(idUsuario: string): Observable<IPuntuacion> {
-    const documentRef = this.afs.collection(`puntuaciones/global/histórico`).doc<IPuntuacion>(idUsuario);
-
-    return documentRef.valueChanges().pipe(
-      map(doc => {
-        if (doc) {
-          return doc;
-        } else {
-          let puntuacion = this.puntuacionVacia
-          puntuacion.idUsuario = idUsuario
-          return puntuacion
-        }
-      }
-      )
-    )
-  };
-*/
-
 }
