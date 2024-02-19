@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 import { ServicioWordleService } from 'src/app/services/servicio-wordle.service';
 
 @Component({
@@ -10,27 +11,50 @@ import { ServicioWordleService } from 'src/app/services/servicio-wordle.service'
 export class WordlePage {
 
   palabrasIntentos = ['','','','','',''];
-  palabraDia = "";
   mostrarInput = true;
   mostrarMensajeGana = false;
   mostrarMensajePierde = false;
+  palabraDia = "";
+  uid = "";
+  fechaActual = "";
 
   constructor(
     private wordleServ: ServicioWordleService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private authServ: AuthService
   ) { }
 
   ionViewWillEnter() {
     this.loadData()   
   }
 
-  async loadData() {
-    this.palabraDia = await this.wordleServ.palabraDia()
+  loadData() {
+    this.palabraDia = this.wordleServ.palabraDia()
+    
+    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    };
+    var fecha = new Date();
+    this.fechaActual = fecha.toLocaleString("es-ES", opcionesDeFormato);
+
+    this.uid = this.authServ.getUid() ?? '';
+
+    this.wordleServ.misJugadas(this.uid, this.fechaActual).subscribe({
+      next: (palabras: any[]) => {
+        this.palabrasIntentos = palabras;
+        if (this.palabrasIntentos[5] != '' && this.palabrasIntentos[5] != "VVVVV") {
+          this.mostrarInput = false;
+          this.mostrarMensajePierde = true;
+        } 
+      }
+    }) 
   }
 
   aciertos(palabra: string) : string {
     if (palabra != "") {
-      const respuesta = this.wordleServ.calcularRespuesta(palabra, this.palabraDia);
+      const respuesta = this.wordleServ.calcularRespuesta(palabra);
       if (respuesta === "VVVVV") {
         this.mostrarInput = false;
         this.mostrarMensajeGana = true;
@@ -44,17 +68,8 @@ export class WordlePage {
   agregarPalabra(event: any) {
     const palabra = event.target.value;
     if (palabra.length >= 5) {
-      const index = this.palabrasIntentos.findIndex(p => p === '');
-      if (index !== -1) {
-        this.palabrasIntentos[index] = palabra.toUpperCase();
-        event.target.value = ''; // Limpiar el input después de agregar la palabra
-        if (this.palabrasIntentos.every(p => p !== '')) {
-          if (!this.palabrasIntentos.includes(this.palabraDia.toUpperCase())) {
-            this.mostrarInput = false;
-            this.mostrarMensajePierde = true;
-          }
-        }
-      }
+      event.target.value = '';
+      this.wordleServ.addJugada(this.uid, palabra, this.fechaActual)
     } else {
       this.presentToast("close", "La palabra debe tener 5 letras", "danger");
     }
