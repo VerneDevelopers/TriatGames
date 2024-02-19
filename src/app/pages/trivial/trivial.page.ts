@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { LoadingController, ToastController } from "@ionic/angular";
+import { LoadingController, ModalController, ToastController } from "@ionic/angular";
 import { PreguntaTrivial } from "src/app/interfaces/pregunta-trivial";
 import { TrivialService } from "src/app/services/trivial.service";
 
@@ -21,6 +21,7 @@ export class TrivialPage implements OnInit {
   diaSemana = "1";
   respuestaUsuario = "";
   respuestaCorrecta = "";
+  nAcertas=0;
   preguntaAcertada = false;
   mensaje = "";
   colorCategoria = "";
@@ -28,7 +29,8 @@ export class TrivialPage implements OnInit {
   constructor(
     private trivialSvc: TrivialService,
     private toastController: ToastController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private modalController: ModalController
   ) {
     this.preguntas = [];
   }
@@ -78,6 +80,7 @@ export class TrivialPage implements OnInit {
   }
   /************************/
 
+  //Comprobamos la respuesta del usuario
   responder(r: string) {
     this.numeroIntentos = this.numeroIntentos + 1;
     this.respuestaUsuario = r;
@@ -85,8 +88,10 @@ export class TrivialPage implements OnInit {
       "Has respondido con la opcion: " + r + " Intentos: " + this.numeroIntentos
     );
     //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
-    if (this.numeroIntentos > 1) {
+    console.log("numPreguntas:",)
+    if (this.numeroIntentos > this.preguntas.length -1) {
       this.numeroIntentos = 0;
+      this.abrirDialogo()
     }
     //Volvemos a llamar la funcion obtenerPreguntas() para recargar las pregutnas
     this.obtenerPreguntas();
@@ -104,6 +109,7 @@ export class TrivialPage implements OnInit {
       console.log("holita");
       this.mensaje = "Has acertadoo canalla!!";
       this.preguntaAcertada = true;
+      this.nAcertas += 1;
       this.mensajeToUser();
     } else if (typeof indiceRespuesta === "undefined") {
       this.mensaje = "Suertee hoy bro!!!";
@@ -114,6 +120,11 @@ export class TrivialPage implements OnInit {
       this.preguntaAcertada = false;
       this.mensajeToUser();
     }
+  }
+
+  //Dialogo que se mostrará al usuario una vez acabe los intentos
+  async abrirDialogo() {
+    console.log('Has acerdado: ' + this.nAcertas)
   }
 
   //Cambiar el color segun la categoria
