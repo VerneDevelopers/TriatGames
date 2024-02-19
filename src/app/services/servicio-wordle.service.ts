@@ -11,8 +11,10 @@ export class ServicioWordleService {
 
   constructor(private firestore: Firestore) { }
 
-  calcularRespuesta(palabra: string, palabradeldia: string): string {
+  calcularRespuesta(palabra: string): string {
     palabra = palabra.toUpperCase()
+
+    var palabradeldia = this.palabraDia()
 
     palabradeldia = palabradeldia.toUpperCase()
 
@@ -24,7 +26,7 @@ export class ServicioWordleService {
 
     var respu = ""
 
-    for (var i = 0; i < paD.length; i++) {
+    for (var i = 0; i <= paD.length; i++) {
 
       if (paD[i] == paI[i]) {
         respu += "V"
@@ -51,7 +53,7 @@ export class ServicioWordleService {
     return collectionData(coleccion, { idField: 'id' });
   }
   
-  async palabraDia(): Promise<string> {
+  palabraDia() : string {
     const opcionesDeFormato: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "2-digit",
@@ -62,20 +64,17 @@ export class ServicioWordleService {
 
     var palabra = ""
 
-    const promesaPalabrasDia = new Promise<string>((resolve) => {
-      this.palabrasDiaFire().subscribe(
-        resp => {
-          for (let i = 0; i < resp.length; i++) {
-            if (resp[i] && fechaString === resp[i].fecha) {
-              palabra = resp[i].palabra;
+    var pas = this.palabrasDiaFire().subscribe(
+      resp => {
+        for(var i = 0; i <= resp.length;i++) {
+          if (resp[i]) {
+            if (fechaString == resp[i].fecha) {
+              palabra = resp[i].palabra
             }
           }
-          resolve(palabra);
         }
-      );
-    });
-  
-    palabra = await promesaPalabrasDia;
+      }
+    )
 
     if (palabra == "") {
       palabra = "Hoy no hay palabra"
