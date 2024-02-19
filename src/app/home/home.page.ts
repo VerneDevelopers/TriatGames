@@ -13,6 +13,12 @@ export class HomePage {
 
   constructor() {}
 
+  entradaWordle = true;
+  entradaAhorcado= false;
+  entradaTrivial = true;
+  entradaPuntuaciones = false;
+  
+
   /* abrirFinDelJuego() {
     if (!this.abrirModal) {
       this.abrirModal = true;
