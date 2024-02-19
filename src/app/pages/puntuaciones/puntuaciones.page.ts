@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-puntuaciones',
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./puntuaciones.page.scss'],
 })
 export class PuntuacionesPage implements OnInit {
-  activeD:boolean=false;
-  activeM:boolean=false;
-  activeA:boolean=false;
+  activeD: boolean = false;
+  activeM: boolean = false;
+  activeA: boolean = true;
+  juego: string = "";
   listaDesordenada = [
     { name: 'Juan', puntuacion: 50 },
     { name: 'María', puntuacion: 30 },
@@ -26,26 +28,41 @@ export class PuntuacionesPage implements OnInit {
     { name: 'Carmen', puntuacion: 42 },
     { name: 'Martín', puntuacion: 38 }
   ];
-  constructor() {}
+  constructor(private route: ActivatedRoute) { }
+
+  ionViewWillEnter() {
+    
+  }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const idParam = params.get('juego');
+      if (idParam !== null) {
+        if (idParam == "") {
+          this.juego="global";
+        } else {
+          this.juego = idParam;
+        }
+      }
+    });
+
   }
 
-  activarD(){
-    this.activeD=!this.activeD;
-    this.activeM=!this.activeM;
-    this.activeA=!this.activeA;
+  activarD() {
+    this.activeD = !this.activeD;
+    this.activeM = false;
+    this.activeA = false;
   }
 
-  activarM(){
-    this.activeD=!this.activeD;
-    this.activeM=!this.activeM;
-    this.activeA=!this.activeA;
+  activarM() {
+    this.activeD = false;
+    this.activeM = !this.activeM;
+    this.activeA = false;
   }
 
-  activarA(){
-    this.activeD=!this.activeD;
-    this.activeM=!this.activeM;
-    this.activeA=!this.activeA;
+  activarA() {
+    this.activeD = false;
+    this.activeM = false;
+    this.activeA = !this.activeA;
   }
 }
