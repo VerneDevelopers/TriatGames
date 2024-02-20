@@ -13,9 +13,9 @@ export class HomePage {
 
   constructor() {}
 
-  entradaWordle = true;
+  entradaWordle = false;
   entradaAhorcado= false;
-  entradaTrivial = true;
+  entradaTrivial = false;
   entradaPuntuaciones = false;
   
 
@@ -27,4 +27,20 @@ export class HomePage {
     }
     console.log(this.abrirModal)
   } */
+
+  entradaWordleTrue() {
+    this.entradaWordle = true;
+  }
+
+  entradaAhorcadoTrue() {
+    this.entradaAhorcado = true;
+  }
+
+  entradaTrivialTrue() {
+    this.entradaTrivial = true;
+  }
+
+  entradaPuntuacionesTrue() {
+    this.entradaPuntuaciones = true;
+  }
 }
