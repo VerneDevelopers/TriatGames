@@ -163,7 +163,7 @@ export class TrivialPage implements OnInit {
   //Funcion para mostrar la espera de la llamada de firebase
   async showLoading() {
     const loading = await this.loadingCtrl.create({
-      message: "Las pregutnas de hoy son...",
+      message: "Las preguntas de hoy son...",
     });
     loading.present();
     setTimeout(() => {
