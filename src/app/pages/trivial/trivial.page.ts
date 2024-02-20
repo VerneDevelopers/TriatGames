@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { getAuth } from "@angular/fire/auth";
 import { LoadingController, ModalController, ToastController } from "@ionic/angular";
 import { PreguntaTrivial } from "src/app/interfaces/pregunta-trivial";
+import { TiradaTrivial } from "src/app/interfaces/tirada-trivial";
 import { TrivialService } from "src/app/services/trivial.service";
 
 @Component({
@@ -18,7 +20,6 @@ export class TrivialPage implements OnInit {
     "respuesta4",
   ];
   numeroIntentos: number = 0;
-  diaSemana = "1";
   respuestaUsuario = "";
   respuestaCorrecta = "";
   nAcertas = 0;
@@ -27,6 +28,11 @@ export class TrivialPage implements OnInit {
   colorCategoria = "";
   abrirModal = false;
   resultado = "ganado";
+  uidUser = "";
+  diaSemana = "1";
+  mes="1";
+  anio="1";
+  dia="1";
 
   constructor(
     private trivialSvc: TrivialService,
@@ -40,9 +46,35 @@ export class TrivialPage implements OnInit {
   ngOnInit() { }
 
   ionViewWillEnter() {
+    this.getIdUser();
     this.obtenerDia();
+    this.addDocument();
     this.obtenerPreguntas();
   }
+
+  //Obtener el id del usuario autentificado
+  getIdUser() {
+    const auth = getAuth();
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        const uid = user.uid;
+        this.uidUser = uid;
+      }
+    });
+  }
+
+  /*------Chapucilla-------*/
+  obtenerDia() {
+    //Obtenemos la fecha actual
+    const fechaActual = new Date();
+    //Para obtener el dia y almacenarlo como un string
+    this.diaSemana = fechaActual.getDay().toString();
+    this.dia = fechaActual.getDate().toString();
+    this.mes = fechaActual.getMonth().toString();
+    this.anio = fechaActual.getFullYear().toString();
+    //console.log("Dia de la semana: " + this.diaSemana);
+  }
+  /************************/
 
   obtenerPreguntas() {
     //Mostramos mensaje de espera al usuario mientras se recogen los datos de firebase
@@ -71,16 +103,6 @@ export class TrivialPage implements OnInit {
       error: (error: any) => { },
     });
   }
-
-  /*------Chapucilla-------*/
-  obtenerDia() {
-    //Obtenemos la fecha actual
-    const fechaActual = new Date();
-    //Para obtener el dia y almacenarlo como un string
-    this.diaSemana = fechaActual.getDay().toString();
-    //console.log("Dia de la semana: " + this.diaSemana);
-  }
-  /************************/
 
   //Comprobamos la respuesta del usuario
   responder(r: string) {
@@ -112,6 +134,7 @@ export class TrivialPage implements OnInit {
       this.mensaje = "Has acertadoo canalla!!";
       this.preguntaAcertada = true;
       this.nAcertas += 1;
+      this.addDocument();
       this.mensajeToUser();
     } else if (typeof indiceRespuesta === "undefined") {
       this.mensaje = "Suertee hoy bro!!!";
@@ -191,14 +214,35 @@ export class TrivialPage implements OnInit {
     console.log(this.abrirModal)
   }
 
+
+  // Añadir jugada
+  async addDocument() {
+    let path = `putosimpares/trivial/${this.uidUser}/respuestas/${this.anio}/${this.mes}/${this.dia}`;
+    const match: TiradaTrivial = {
+      idJugador: this.uidUser,
+      enunciado: this.pregunta.preguntaEnunciado,
+      respuesta: this.respuestaUsuario,
+      esCorrecta: this.preguntaAcertada
+    };
+    console.log(path);
+    const response = await this.trivialSvc.addDocument(path, match)
+    //console.log(response)
+  }
+
+
+
   //Falta verificar que la respuesta es correcta o incorrecta --> CHECK
   //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas --> CHECK
-  //Añadir la respuesta a firebase
   //Mostrar un mensaje al usuario --> CHECK
   //Añadir color segun la categoria --> CHECK
   //Que hacer cuando se acierta y se falla --> CHECK
-  //Cuando terminan las preguntas que se hace? 
+  //Cuando terminan las preguntas que se hace?  --> CHECK
   //Hacer un loading al empezar la pagina hasta que recargue las preguntas --> CHECK
   //Que pasa con los iconos?
   //Se muestra undefinded en alguna respues ¿por qué?
+  //Añadir la respuesta a firebase --> CHECK
+  //No es mejor añadir las respuestas totales en vez de una en una 
+  //Ale podemos guardar directamente el id de firebase
+  //¿Qué guardamos en la tirada?
 }
+

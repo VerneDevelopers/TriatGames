@@ -4,6 +4,7 @@ import { PreguntaTrivial } from '../interfaces/pregunta-trivial';
 import { TiradaTrivial } from '../interfaces/tirada-trivial';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DatePipe } from '@angular/common';
+import { addDoc, collection, getFirestore } from '@angular/fire/firestore';
 
 
 
@@ -29,11 +30,16 @@ export class TrivialService {
     const fechaJugada = this.datePipe.transform(new Date(), this.formatoFecha)?.replace(/\//g, "")!;
     const docJugador = this.firestore.collection('tiradas').doc(tirada.idJugador.toString());
     const fechaColeccionRef = docJugador.collection(fechaJugada);
-    await fechaColeccionRef.add({
-      idPregunta: tirada.idPregunta,
-      respuesta: tirada.respuesta,
-      esCorrecta: tirada.esCorrecta
-    });
+    // await fechaColeccionRef.add({
+    //   idPregunta: tirada.idPregunta,
+    //   respuesta: tirada.respuesta,
+    //   esCorrecta: tirada.esCorrecta
+    // });
+  }
+
+  // ======= AGREGAR UN DOCUMENTO ==========
+  addDocument(path: string, data:any){
+    return addDoc(collection(getFirestore(),path), data) 
   }
 
   //Hay que plantearse que es lo que llegará, si un tipo date o un tipo string
