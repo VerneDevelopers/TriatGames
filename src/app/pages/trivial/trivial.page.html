@@ -34,5 +34,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div *ngIf="abrirModal">
+    <app-abrir-modal-fin resultado="{{resultado}}" />
+  </div>
 </ion-content>
 

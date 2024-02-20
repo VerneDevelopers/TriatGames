@@ -21,10 +21,12 @@ export class TrivialPage implements OnInit {
   diaSemana = "1";
   respuestaUsuario = "";
   respuestaCorrecta = "";
-  nAcertas=0;
+  nAcertas = 0;
   preguntaAcertada = false;
   mensaje = "";
   colorCategoria = "";
+  abrirModal = false;
+  resultado = "ganado";
 
   constructor(
     private trivialSvc: TrivialService,
@@ -35,7 +37,7 @@ export class TrivialPage implements OnInit {
     this.preguntas = [];
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ionViewWillEnter() {
     this.obtenerDia();
@@ -47,7 +49,7 @@ export class TrivialPage implements OnInit {
     this.showLoading();
     this.trivialSvc.getPreguntas(this.diaSemana).subscribe({
       next: (res: any) => {
-        console.log(res);
+        //console.log(res);
         //Almacenamos las preguntas en el array preguntas
         this.preguntas = res;
         //Cerramos la espera
@@ -56,17 +58,17 @@ export class TrivialPage implements OnInit {
         this.respuestaCorrecta = this.respuestas[this.pregunta.indiceRespuesta];
         //Utilizamos el numero de intentos para recorrer el array
         this.pregunta = this.preguntas[this.numeroIntentos];
-        console.log(this.pregunta);
+        //console.log(this.pregunta);
         //Almacenamos las respuestas en el array respuestas
         this.respuestas = this.pregunta.respuestas;
-        console.log(this.pregunta.indiceRespuesta);
+        //console.log(this.pregunta.indiceRespuesta);
         //Comprobamos la respueta del usuario si es correcta
         this.comprobarRespuesta(this.respuestaCorrecta);
         //Almacenamos la categoria
         this.asignarColor(this.pregunta.categoria)
-        console.log(this.colorCategoria);
+        //console.log(this.colorCategoria);
       },
-      error: (error: any) => {},
+      error: (error: any) => { },
     });
   }
 
@@ -76,7 +78,7 @@ export class TrivialPage implements OnInit {
     const fechaActual = new Date();
     //Para obtener el dia y almacenarlo como un string
     this.diaSemana = fechaActual.getDay().toString();
-    console.log("Dia de la semana: " + this.diaSemana);
+    //console.log("Dia de la semana: " + this.diaSemana);
   }
   /************************/
 
@@ -88,10 +90,10 @@ export class TrivialPage implements OnInit {
       "Has respondido con la opcion: " + r + " Intentos: " + this.numeroIntentos
     );
     //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
-    console.log("numPreguntas:",)
-    if (this.numeroIntentos > this.preguntas.length -1) {
+    //console.log("numPreguntas:",)
+    if (this.numeroIntentos > this.preguntas.length - 1) {
       this.numeroIntentos = 0;
-      this.abrirDialogo()
+      this.abrirFinDelJuego();
     }
     //Volvemos a llamar la funcion obtenerPreguntas() para recargar las pregutnas
     this.obtenerPreguntas();
@@ -101,9 +103,9 @@ export class TrivialPage implements OnInit {
   comprobarRespuesta(indiceRespuesta: string) {
     console.log(
       "respuestaUsuario: " +
-        this.respuestaUsuario +
-        " indiceRespuesta: " +
-        indiceRespuesta
+      this.respuestaUsuario +
+      " indiceRespuesta: " +
+      indiceRespuesta
     );
     if (this.respuestaUsuario == indiceRespuesta) {
       console.log("holita");
@@ -122,13 +124,8 @@ export class TrivialPage implements OnInit {
     }
   }
 
-  //Dialogo que se mostrará al usuario una vez acabe los intentos
-  async abrirDialogo() {
-    console.log('Has acerdado: ' + this.nAcertas)
-  }
-
   //Cambiar el color segun la categoria
-  asignarColor(categoria:string) {
+  asignarColor(categoria: string) {
     switch (categoria) {
       case "geografia":
         this.colorCategoria = 'warning'
@@ -174,8 +171,28 @@ export class TrivialPage implements OnInit {
     }, 2000); // Duración de dos segundos en milisegundos
   }
 
+  //Utilizamos componente de oscar para mostrar al usuario el final de la partida
+  abrirFinDelJuego() {
+    console.log('Respuestas acertadas: ');
+    console.log(this.nAcertas)
+    if (!this.abrirModal) {
+      if (this.nAcertas >= 2) {
+
+        this.abrirModal = true;
+        this.resultado = "ganado";
+      } else {
+        this.abrirModal = true;
+        this.resultado = "perdido";
+      }
+
+    } else {
+      this.abrirModal = false;
+    }
+    console.log(this.abrirModal)
+  }
+
   //Falta verificar que la respuesta es correcta o incorrecta --> CHECK
-  //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
+  //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas --> CHECK
   //Añadir la respuesta a firebase
   //Mostrar un mensaje al usuario --> CHECK
   //Añadir color segun la categoria --> CHECK
@@ -183,4 +200,5 @@ export class TrivialPage implements OnInit {
   //Cuando terminan las preguntas que se hace? 
   //Hacer un loading al empezar la pagina hasta que recargue las preguntas --> CHECK
   //Que pasa con los iconos?
+  //Se muestra undefinded en alguna respues ¿por qué?
 }

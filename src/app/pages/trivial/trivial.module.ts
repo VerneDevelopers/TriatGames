@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TrivialPageRoutingModule } from './trivial-routing.module';
 
 import { TrivialPage } from './trivial.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TrivialPageRoutingModule
+    TrivialPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [TrivialPage]
 })
