@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IPuntuacion } from 'src/app/interfaces/i-puntuacion';
+import { InterfacePuntos } from 'src/app/interfaces/interface-puntos';
+import { ScoreService } from 'src/app/services/score.service';
 
 @Component({
   selector: 'app-puntuaciones',
@@ -11,27 +14,12 @@ export class PuntuacionesPage implements OnInit {
   activeM: boolean = false;
   activeA: boolean = true;
   juego: string = "";
-  listaDesordenada = [
-    { name: 'Juan', puntuacion: 50 },
-    { name: 'María', puntuacion: 30 },
-    { name: 'Pedro', puntuacion: 70 },
-    { name: 'Ana', puntuacion: 40 },
-    { name: 'Luis', puntuacion: 60 },
-    { name: 'Sofía', puntuacion: 55 },
-    { name: 'Carlos', puntuacion: 25 },
-    { name: 'Laura', puntuacion: 45 },
-    { name: 'Diego', puntuacion: 80 },
-    { name: 'Elena', puntuacion: 35 },
-    { name: 'Javier', puntuacion: 65 },
-    { name: 'Lucía', puntuacion: 20 },
-    { name: 'Manuel', puntuacion: 75 },
-    { name: 'Carmen', puntuacion: 42 },
-    { name: 'Martín', puntuacion: 38 }
-  ];
-  constructor(private route: ActivatedRoute) { }
+  listaPuntosFinal: InterfacePuntos[] = []
+
+  constructor(private route: ActivatedRoute, private serv: ScoreService) { }
 
   ionViewWillEnter() {
-    
+
   }
 
   ngOnInit() {
@@ -39,7 +27,7 @@ export class PuntuacionesPage implements OnInit {
       const idParam = params.get('juego');
       if (idParam !== null) {
         if (idParam == "") {
-          this.juego="global";
+          this.juego = "global";
         } else {
           this.juego = idParam;
         }
@@ -52,17 +40,115 @@ export class PuntuacionesPage implements OnInit {
     this.activeD = !this.activeD;
     this.activeM = false;
     this.activeA = false;
+    this.serv.scoreDay(new Date()).subscribe(
+      resp => {
+        for (const p of resp) {
+          switch (this.juego) {
+            case "global":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTotales
+              })
+              break;
+            case "Wordle":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsWordle
+              })
+              break;
+            case "Ahorcado":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsAhorcado
+              })
+              break;
+            case "Trivial":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTrivial
+              })
+              break;
+          }
+        }
+      }
+    )
   }
 
   activarM() {
     this.activeD = false;
     this.activeM = !this.activeM;
     this.activeA = false;
+    this.serv.scoreWeek(new Date()).subscribe(
+      resp => {
+        for (const p of resp) {
+          switch (this.juego) {
+            case "global":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTotales
+              })
+              break;
+            case "Wordle":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsWordle
+              })
+              break;
+            case "Ahorcado":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsAhorcado
+              })
+              break;
+            case "Trivial":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTrivial
+              })
+              break;
+          }
+        }
+      }
+    )
+
+
   }
 
   activarA() {
     this.activeD = false;
     this.activeM = false;
     this.activeA = !this.activeA;
+    this.serv.scoreWorld().subscribe(
+      resp => {
+        for (const p of resp) {
+          switch (this.juego) {
+            case "global":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTotales
+              })
+              break;
+            case "Wordle":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsWordle
+              })
+              break;
+            case "Ahorcado":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsAhorcado
+              })
+              break;
+            case "Trivial":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTrivial
+              })
+              break;
+          }
+        }
+      }
+    )
   }
 }
