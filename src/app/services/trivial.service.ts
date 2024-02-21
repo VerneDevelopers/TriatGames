@@ -4,7 +4,7 @@ import { PreguntaTrivial } from '../interfaces/pregunta-trivial';
 import { TiradaTrivial } from '../interfaces/tirada-trivial';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DatePipe } from '@angular/common';
-import { addDoc, collection, getFirestore } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, getFirestore, query } from '@angular/fire/firestore';
 
 
 
@@ -45,9 +45,15 @@ export class TrivialService {
     return documento.collection<TiradaTrivial[]>(fecha.replace(/\//g, "")!).valueChanges();
   }
 
-  
 
-  
+   //==== OBTENER DOCUMENTOS DE UNA COLLECION ====
+   getCollectinData(uidUser: string, collecstionQuery?:any){
+    const fechaJugada = this.datePipe.transform(new Date(), this.formatoFecha)?.replace(/\//g, "")!;
+    let path = `tiradas/${uidUser}/${fechaJugada}`;
+    const ref = collection(getFirestore(),path);
+    return collectionData(query(ref,collecstionQuery),{idField:'id'})
+  }
+
 }
 
 

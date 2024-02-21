@@ -13,7 +13,7 @@ import { TrivialService } from "src/app/services/trivial.service";
   styleUrls: ["./trivial.page.scss"],
 })
 export class TrivialPage implements OnInit {
-  tiradas: TiradaTrivial[][] = [];
+  tiradas: TiradaTrivial = {} as TiradaTrivial;
   preguntas: PreguntaTrivial[];
   pregunta: PreguntaTrivial = {} as PreguntaTrivial;
   respuestas: string[] = [
@@ -53,7 +53,6 @@ export class TrivialPage implements OnInit {
   ionViewWillEnter() {
     this.getIdUser();
     this.obtenerDia();
-    this.obtenerJugadas();
     this.obtenerPreguntas();
   }
 
@@ -64,6 +63,8 @@ export class TrivialPage implements OnInit {
       if (user) {
         const uid = user.uid;
         this.uidUser = uid;
+        console.log('user: ', this.uidUser)
+        this.obtenerJugadas_v2();
       }
     });
   }
@@ -253,18 +254,33 @@ export class TrivialPage implements OnInit {
     //console.log(response)
   }
 
-
-  obtenerJugadas(){
-    const fechaJugada = this.datePipe.transform(new Date(), this.formatoFecha)?.replace(/\//g, "")!;
-    let uidNumber = parseInt(this.uidUser);
-    console.log('hola jugadas: ')
-    this.trivialSvc.getJugada(uidNumber, fechaJugada).subscribe((data) => {
-      this.tiradas = data;
-      console.log(this.tiradas);
+  // async obtenerJugadas(){
+  //   const fechaJugada = this.datePipe.transform(new Date(), this.formatoFecha)?.replace(/\//g, "")!;
+  //   let uidNumber = parseInt(this.uidUser);
+  //   console.log('hola jugadas: ')
+  //   this.trivialSvc.getJugada(uidNumber, fechaJugada).subscribe((data) => {
+  //     this.tiradas = data;
+  //     console.log(this.tiradas);
       
+  //   });
+
+  // }
+
+  obtenerJugadas_v2(){
+    console.log(this.uidUser);
+    let sub = this.trivialSvc.getCollectinData(this.uidUser).subscribe({
+      next: (res: any) => {
+        console.log('holaaaa:')
+        console.log(res);
+        this.tiradas = res;
+        sub.unsubscribe;
+      },
+      error: (error:any) =>{
+
+
+      }
     });
 
-    
   }
    
   }
