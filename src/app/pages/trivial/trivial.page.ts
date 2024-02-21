@@ -38,7 +38,6 @@ export class TrivialPage implements OnInit {
     private trivialSvc: TrivialService,
     private toastController: ToastController,
     private loadingCtrl: LoadingController,
-    private modalController: ModalController
   ) {
     this.preguntas = [];
   }
@@ -48,7 +47,6 @@ export class TrivialPage implements OnInit {
   ionViewWillEnter() {
     this.getIdUser();
     this.obtenerDia();
-    this.addDocument();
     this.obtenerPreguntas();
   }
 
@@ -81,7 +79,7 @@ export class TrivialPage implements OnInit {
     this.showLoading();
     this.trivialSvc.getPreguntas(this.diaSemana).subscribe({
       next: (res: any) => {
-        //console.log(res);
+        console.log(res);
         //Almacenamos las preguntas en el array preguntas
         this.preguntas = res;
         //Cerramos la espera
@@ -90,7 +88,7 @@ export class TrivialPage implements OnInit {
         this.respuestaCorrecta = this.respuestas[this.pregunta.indiceRespuesta];
         //Utilizamos el numero de intentos para recorrer el array
         this.pregunta = this.preguntas[this.numeroIntentos];
-        //console.log(this.pregunta);
+        console.log(this.pregunta);
         //Almacenamos las respuestas en el array respuestas
         this.respuestas = this.pregunta.respuestas;
         //console.log(this.pregunta.indiceRespuesta);
@@ -143,6 +141,7 @@ export class TrivialPage implements OnInit {
       this.mensaje = `Mala suerte amigo, era ${indiceRespuesta}`;
       console.log("no hay holita");
       this.preguntaAcertada = false;
+      this.addDocument();
       this.mensajeToUser();
     }
   }
@@ -217,7 +216,7 @@ export class TrivialPage implements OnInit {
 
   // Añadir jugada
   async addDocument() {
-    let path = `putosimpares/trivial/${this.uidUser}/respuestas/${this.anio}/${this.mes}/${this.dia}`;
+    let path = `trivialPreguntas/users/${this.uidUser}/respuestas/${this.anio}/${this.mes}/${this.dia}`;
     const match: TiradaTrivial = {
       idJugador: this.uidUser,
       enunciado: this.pregunta.preguntaEnunciado,
@@ -238,11 +237,13 @@ export class TrivialPage implements OnInit {
   //Que hacer cuando se acierta y se falla --> CHECK
   //Cuando terminan las preguntas que se hace?  --> CHECK
   //Hacer un loading al empezar la pagina hasta que recargue las preguntas --> CHECK
+  //Añadir la respuesta a firebase --> CHECK
   //Que pasa con los iconos?
   //Se muestra undefinded en alguna respues ¿por qué?
-  //Añadir la respuesta a firebase --> CHECK
   //No es mejor añadir las respuestas totales en vez de una en una 
   //Ale podemos guardar directamente el id de firebase
   //¿Qué guardamos en la tirada?
+  //¿Qué puedo hacer para no poder volver a jugar?
+  //Problemas con interface, vista, servicio, firebase estructura
 }
 
