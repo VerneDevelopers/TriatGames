@@ -13,7 +13,7 @@ import { TrivialService } from "src/app/services/trivial.service";
   styleUrls: ["./trivial.page.scss"],
 })
 export class TrivialPage implements OnInit {
-  tiradas: TiradaTrivial = {} as TiradaTrivial;
+  tiradas: TiradaTrivial[] = [];
   preguntas: PreguntaTrivial[];
   pregunta: PreguntaTrivial = {} as PreguntaTrivial;
   respuestas: string[] = [
@@ -24,6 +24,7 @@ export class TrivialPage implements OnInit {
   ];
   indice=0;
   numeroIntentos = 0;
+  preguntasContestadas = 0;
   respuestaUsuario = "";
   respuestaCorrecta = "";
   nAcertas = 0;
@@ -34,9 +35,6 @@ export class TrivialPage implements OnInit {
   resultado = "ganado";
   uidUser = "";
   diaSemana = "1";
-  mes = "1";
-  anio = "1";
-  dia = "1";
   formatoFecha: string = 'dd/MM/yyyy';
 
   constructor(
@@ -65,6 +63,7 @@ export class TrivialPage implements OnInit {
         this.uidUser = uid;
         console.log('user: ', this.uidUser)
         this.obtenerJugadas_v2();
+        console.log('tiradas: ', this.preguntasContestadas)
       }
     });
   }
@@ -76,15 +75,21 @@ export class TrivialPage implements OnInit {
     const fechaActual = new Date();
     //Para obtener el dia y almacenarlo como un string
     this.diaSemana = fechaActual.getDay().toString();
-    this.dia = fechaActual.getDate().toString();
-    this.mes = fechaActual.getMonth().toString();
-    this.anio = fechaActual.getFullYear().toString();
     //console.log("Dia de la semana: " + this.diaSemana);
   }
   /************************/
 
+  controlTiradas(){
+    if(this.preguntasContestadas >= this.preguntas.length){
+      this.abrirModal = true;
+    }else{
+      this.obtenerPregunta()
+      
+    }
+  }
 
   obtenerPreguntas() {
+    console.log('tiradas: ', this.preguntasContestadas)
     //Mostramos mensaje de espera al usuario mientras se recogen los datos de firebase
     this.showLoading();
     this.trivialSvc.getPreguntas(this.diaSemana).subscribe({
@@ -96,7 +101,7 @@ export class TrivialPage implements OnInit {
         //Cerramos la espera
         this.loadingCtrl.dismiss();
         //Obtenemos las preguntas del array Preguntas
-        this.obtenerPregunta()
+        //this.obtenerPregunta()
       },
       error: (error: any) => { },
     });
@@ -273,7 +278,9 @@ export class TrivialPage implements OnInit {
         console.log('holaaaa:')
         console.log(res);
         this.tiradas = res;
-        sub.unsubscribe;
+        this.preguntasContestadas = this.tiradas.length;
+        console.log('tiradas: ',this.preguntasContestadas);
+        this.controlTiradas();
       },
       error: (error:any) =>{
 
@@ -283,7 +290,7 @@ export class TrivialPage implements OnInit {
 
   }
    
-  }
+}
 
   //Falta verificar que la respuesta es correcta o incorrecta --> CHECK
   //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas --> CHECK
