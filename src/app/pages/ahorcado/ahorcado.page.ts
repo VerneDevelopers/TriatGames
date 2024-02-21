@@ -12,7 +12,7 @@ import { AhorcadoService } from 'src/app/services/ahorcado/ahorcado.service';
 export class AhorcadoPage implements OnInit {
  userUid : string
  fecha !: Date
- dataHoy : Data [] = []
+ dataHoy : any [] = []
  letra : string = ''
  vidas : number = 8
  ahorcadoImgs: string[] = [
@@ -33,14 +33,16 @@ export class AhorcadoPage implements OnInit {
    this.userUid = this.auth.currentUser?.uid.toString()
    else
    this.userUid = 'Error'
+
    this.fecha = new Date()
    console.log(this.userUid)
-   this.serv.getPalabraDia( this.fecha).subscribe( resp => { this.dataHoy = resp})
-   console.log(this.dataHoy)
+   this.serv.getPalabraDia(this.fecha).subscribe( resp => { this.dataHoy = resp})
  }
 
 
  ngOnInit() {
+
+  
    /*
    var fecha:Date=new Date()
    this.miServicio.getLetraporDia("userid",fecha).subscribe(
@@ -50,8 +52,11 @@ export class AhorcadoPage implements OnInit {
      (error) => console.error(error)
    );
    */
+ }
 
-
+ ionViewWillEnter(){
+  this.serv.getLetraporDia(this.userUid,new Date()).subscribe(resp =>{this.dataHoy = resp;
+    console.log(this.dataHoy)})
  }
 
 
@@ -59,8 +64,10 @@ export class AhorcadoPage implements OnInit {
 
  addLetra(){
    this.serv.addJugada(this.userUid,this.letra,this.fecha)
-   this.letra = ''
-   this.indiceImagen++
+   this.indiceImagen++; 
+    if (this.indiceImagen >= this.ahorcadoImgs.length) {
+      this.indiceImagen = 8;
+    }
  }
 
 
