@@ -21,7 +21,8 @@ export class TrivialPage implements OnInit {
     "respuesta3",
     "respuesta4",
   ];
-  numeroIntentos: number = 0;
+  indice=0;
+  numeroIntentos = 0;
   respuestaUsuario = "";
   respuestaCorrecta = "";
   nAcertas = 0;
@@ -91,7 +92,7 @@ export class TrivialPage implements OnInit {
     this.trivialSvc.getPreguntas(this.diaSemana).subscribe({
       next: (res: any) => {
         console.log(this.pregunta.indiceRespuesta);
-        //console.log(res);
+        console.log(res);
         //Almacenamos las preguntas en el array preguntas
         this.preguntas = res;
         //Cerramos la espera
@@ -106,17 +107,19 @@ export class TrivialPage implements OnInit {
 
   //Funcion para obtener la pregunta del array
   obtenerPregunta() {
+    console.log(this.preguntas);
     //Utilizamos el numero de intentos para recorrer el array
     this.pregunta = this.preguntas[this.numeroIntentos];
-    //console.log(this.pregunta);
-    //Almacenamos la repuesta correcta para luego comprobar si es correcta la respuesta del usuario
-    this.respuestaCorrecta = this.respuestas[this.pregunta.indiceRespuesta];
-    //Almacenamos las respuestas en el array respuestas
-    console.log('indiceRespuesta',this.pregunta.indiceRespuesta);
+    console.log('pregunta',this.pregunta);
+    //Almacenamos las respuestas posibles
     this.respuestas = this.pregunta.respuestas;
-    console.log('indiceRespuesta',this.pregunta.indiceRespuesta);
-    //Comprobamos la respueta del usuario si es correcta
-    this.comprobarRespuesta(this.respuestaCorrecta);
+    console.log('respuestas',this.respuestas);
+    //Encontramos la respuesta correcta mediante el indice
+    this.indice = this.pregunta.indiceRespuesta;
+    console.log('indice: ',this.indice);
+    //Almacenamos la respuesta correcta
+    this.respuestaCorrecta = this.respuestas[this.indice];
+    console.log('respuestaCorrecta',this.respuestaCorrecta);
     //Almacenamos la categoria
     this.asignarColor(this.pregunta.categoria)
     //console.log(this.colorCategoria);
@@ -129,39 +132,38 @@ export class TrivialPage implements OnInit {
     this.numeroIntentos = this.numeroIntentos + 1;
     this.respuestaUsuario = r;
     console.log(
-      "Has respondido con la opcion: " + r + " Intentos: " + this.numeroIntentos
+      "Has respondido con la opcion: " + r + " Intentos: " + this.numeroIntentos + " Opt Correcta: " + this.respuestaCorrecta
     );
-    //Volvemos a llamar la funcion obtenerPreguntas() para recargar las pregutnas
-    this.obtenerPreguntas();
+    this.comprobarRespuesta();    
     //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
-    //console.log("numPreguntas:",)
     if (this.numeroIntentos > this.preguntas.length - 1) {
       //this.numeroIntentos = 0;
       this.abrirFinDelJuego();
     }
+    this.obtenerPregunta();
   }
 
 
   //Se comprueba la respuesta del usuario
-  comprobarRespuesta(indiceRespuesta: string) {
+  comprobarRespuesta() {
     console.log(
       "respuestaUsuario: " +
       this.respuestaUsuario +
-      " indiceRespuesta: " +
-      indiceRespuesta
+      " respuestaCorrecta: " +
+      this.respuestaCorrecta
     );
-    if (this.respuestaUsuario == indiceRespuesta) {
+    if (this.respuestaUsuario == this.respuestaCorrecta) {
       console.log("holita");
       this.mensaje = "Has acertadoo canalla!!";
       this.preguntaAcertada = true;
       this.nAcertas += 1;
       this.addTirada();
       this.mensajeToUser();
-    } else if (typeof indiceRespuesta === "undefined") {
+    } else if (typeof this.respuestaCorrecta === "undefined") {
       this.mensaje = "Suertee hoy bro!!!";
       this.mensajeToUser();
     } else {
-      this.mensaje = `Mala suerte amigo, era ${indiceRespuesta}`;
+      this.mensaje = `Mala suerte amigo, era ${this.respuestaCorrecta}`;
       console.log("no hay holita");
       this.preguntaAcertada = false;
       this.addTirada();
@@ -243,9 +245,6 @@ export class TrivialPage implements OnInit {
     console.log(this.abrirModal)
   }
 
-
-
-
   // Añadir jugada
   async addTirada() {
     console.log(this.preguntas)
@@ -273,11 +272,6 @@ export class TrivialPage implements OnInit {
   });
    
   }
-
-
-
-
-
 
   //Falta verificar que la respuesta es correcta o incorrecta --> CHECK
   //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas --> CHECK
