@@ -38,7 +38,6 @@ export class TrivialPage implements OnInit {
   dia = "1";
   formatoFecha: string = 'dd/MM/yyyy';
 
-
   constructor(
     private trivialSvc: TrivialService,
     private toastController: ToastController,
@@ -48,9 +47,7 @@ export class TrivialPage implements OnInit {
     this.preguntas = [];
   }
 
-
   ngOnInit() { }
-
 
   ionViewWillEnter() {
     this.getIdUser();
@@ -58,7 +55,6 @@ export class TrivialPage implements OnInit {
     this.obtenerJugadas();
     this.obtenerPreguntas();
   }
-
 
   //Obtener el id del usuario autentificado
   getIdUser() {
@@ -228,17 +224,14 @@ export class TrivialPage implements OnInit {
     console.log('Respuestas acertadas: ');
     console.log(this.nAcertas)
     if (!this.abrirModal) {
-      if (this.nAcertas >= 2) {
-
-
+      console.log(this.preguntas.length/2)
+      if (this.nAcertas > this.preguntas.length/2) {
         this.abrirModal = true;
         this.resultado = "ganado";
       } else {
         this.abrirModal = true;
         this.resultado = "perdido";
       }
-
-
     } else {
       this.abrirModal = false;
     }
