@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPuntuacion } from 'src/app/interfaces/i-puntuacion';
 import { InterfacePuntos } from 'src/app/interfaces/interface-puntos';
 import { ScoreService } from 'src/app/services/score.service';
 
