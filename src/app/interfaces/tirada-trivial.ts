@@ -1,6 +1,6 @@
 export interface TiradaTrivial {
     idJugador: string;
-    enunciado : string;
+    idPregunta : number; 
     respuesta: string;
     esCorrecta: boolean;
 }
