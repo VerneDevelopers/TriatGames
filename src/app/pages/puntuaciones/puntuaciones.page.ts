@@ -18,7 +18,38 @@ export class PuntuacionesPage implements OnInit {
   constructor(private route: ActivatedRoute, private serv: ScoreService) { }
 
   ionViewWillEnter() {
-
+    this.serv.scoreWorld().subscribe(
+      resp => {
+        for (const p of resp) {
+          switch (this.juego) {
+            case "global":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTotales
+              })
+              break;
+            case "Wordle":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsWordle
+              })
+              break;
+            case "Ahorcado":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsAhorcado
+              })
+              break;
+            case "Trivial":
+              this.listaPuntosFinal.push({
+                "name": p.idUsuario,
+                "puntuacion": p.ptsTrivial
+              })
+              break;
+          }
+        }
+      }
+    )
   }
 
   ngOnInit() {
@@ -30,12 +61,15 @@ export class PuntuacionesPage implements OnInit {
         } else {
           this.juego = idParam;
         }
+      }else{
+        this.juego = "global";
       }
     });
 
   }
 
   activarD() {
+    this.listaPuntosFinal=[]
     this.activeD = !this.activeD;
     this.activeM = false;
     this.activeA = false;
@@ -74,6 +108,7 @@ export class PuntuacionesPage implements OnInit {
   }
 
   activarM() {
+    this.listaPuntosFinal=[]
     this.activeD = false;
     this.activeM = !this.activeM;
     this.activeA = false;
@@ -114,6 +149,7 @@ export class PuntuacionesPage implements OnInit {
   }
 
   activarA() {
+    this.listaPuntosFinal=[]
     this.activeD = false;
     this.activeM = false;
     this.activeA = !this.activeA;

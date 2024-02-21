@@ -19,5 +19,14 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <app-lista-puntos [listaEntrada]="listaPuntosFinal"></app-lista-puntos>
+  <app-lista-puntos [listaEntrada]="listaPuntosFinal" *ngIf="listaPuntosFinal.length > 0; else noData"></app-lista-puntos>
 </ion-content>
+
+<ng-template #noData>
+  <h2 class="ion-text-center">
+    <ion-icon name="cloud-offline-outline"></ion-icon>
+    No hay datos disponibles
+    <ion-icon name="cloud-offline-outline"></ion-icon>
+  </h2>
+</ng-template>
+
