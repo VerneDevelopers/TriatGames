@@ -13,6 +13,7 @@ import { TrivialService } from "src/app/services/trivial.service";
   styleUrls: ["./trivial.page.scss"],
 })
 export class TrivialPage implements OnInit {
+  tiradas: TiradaTrivial[][] = [];
   preguntas: PreguntaTrivial[];
   pregunta: PreguntaTrivial = {} as PreguntaTrivial;
   respuestas: string[] = [
@@ -256,13 +257,15 @@ export class TrivialPage implements OnInit {
   obtenerJugadas(){
     const fechaJugada = this.datePipe.transform(new Date(), this.formatoFecha)?.replace(/\//g, "")!;
     let uidNumber = parseInt(this.uidUser);
-    this.trivialSvc.getJugada(uidNumber, fechaJugada).subscribe({
-      next: (res: any) => {
-        console.log('jugada: ', res);
-        //console.log(res);
-        //Almacenamos las preguntas en el array preguntas
-      }  
-  });
+    console.log('hola jugadas: ')
+    this.trivialSvc.getJugada(uidNumber, fechaJugada).subscribe((data) => {
+      this.tiradas = data;
+      console.log(this.tiradas);
+      
+    });
+
+    
+  }
    
   }
 
@@ -279,7 +282,7 @@ export class TrivialPage implements OnInit {
   //No es mejor añadir las respuestas totales en vez de una en una
   //Ale podemos guardar directamente el id de firebase
   //¿Qué guardamos en la tirada?
-}
+
 
 
 

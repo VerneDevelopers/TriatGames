@@ -30,16 +30,11 @@ export class TrivialService {
     const fechaJugada = this.datePipe.transform(new Date(), this.formatoFecha)?.replace(/\//g, "")!;
     const docJugador = this.firestore.collection('tiradas').doc(tirada.idJugador.toString());
     const fechaColeccionRef = docJugador.collection(fechaJugada);
-    // await fechaColeccionRef.add({
-    //   idPregunta: tirada.idPregunta,
-    //   respuesta: tirada.respuesta,
-    //   esCorrecta: tirada.esCorrecta
-    // });
-  }
-
-  // ======= AGREGAR UN DOCUMENTO ==========
-  addDocument(path: string, data:any){
-    return addDoc(collection(getFirestore(),path), data) 
+    await fechaColeccionRef.add({
+      idPregunta: tirada.idPregunta,
+      respuesta: tirada.respuesta,
+      esCorrecta: tirada.esCorrecta
+    });
   }
 
   //Hay que plantearse que es lo que llegará, si un tipo date o un tipo string
@@ -49,6 +44,8 @@ export class TrivialService {
     console.log("getJugada", documento.collection<TiradaTrivial[]>(fecha.replace(/\//g, "")!).valueChanges());
     return documento.collection<TiradaTrivial[]>(fecha.replace(/\//g, "")!).valueChanges();
   }
+
+  
 
   
 }
