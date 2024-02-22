@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
+
   firebaseConfig: {
+
     apiKey: "AIzaSyC2VtO_6L0SbeDRLZninsrLxCQEf15mpcw",
     authDomain: "triatgames-fee93.firebaseapp.com",
     projectId: "triatgames-fee93",

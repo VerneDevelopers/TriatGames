@@ -1,8 +1,7 @@
 export interface TiradaTrivial {
-    idJugador: number;
-    idPregunta : number,
-    //Valorar si es necesario guardar el id generado de FireBase
-    //idFB: string;
+    idJugador: string;
+    idPregunta : number; 
     respuesta: string;
     esCorrecta: boolean;
 }
+  
