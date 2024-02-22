@@ -27,5 +27,25 @@
 }
 
 .visto {
-  color : gray;
+  color: gray;
+}
+
+ion-col, ion-card{
+  height: 90%;
+}
+
+.card-wordle{
+  background-image: url(../../assets/img/wordle_bg.jpg);
+}
+
+
+
+ion-grid {
+  height: 50%;
+  border: 1px solid red;
+}
+
+ion-row{
+  border: 1px solid blue;
+  height: 50%;
 }
