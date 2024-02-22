@@ -40,10 +40,10 @@ export class TrivialService {
 
   //Hay que plantearse que es lo que llegará, si un tipo date o un tipo string
   //Lo dejo provisionalmente en string
-  getJugada(idJugador: string, fecha: string): Observable<TiradaTrivial[][]> {
+  getJugada(idJugador: string, fecha: string): Observable<TiradaTrivial[]> {
     const documento = this.firestore.collection('tiradas').doc(idJugador);
     //console.log("getJugada", documento.collection<TiradaTrivial[]>(fecha.replace(/\//g, "")!).valueChanges());
-    return documento.collection<TiradaTrivial[]>(fecha.replace(/\//g, "")!).valueChanges();
+    return documento.collection<TiradaTrivial>(fecha.replace(/\//g, "")!).valueChanges();
   }
 
 
