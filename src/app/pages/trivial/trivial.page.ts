@@ -33,7 +33,8 @@ export class TrivialPage implements OnInit {
   colorCategoria = "";
   abrirModal = false;
   resultado = "ganado";
-  uidUser = "";
+ // uidUser = "";
+ uid:string ="";
   diaSemana = "1";
   formatoFecha: string = 'dd/MM/yyyy';
   constructor(
@@ -41,16 +42,17 @@ export class TrivialPage implements OnInit {
     private toastController: ToastController,
     private loadingCtrl: LoadingController,
     private datePipe: DatePipe,
-    auth: AuthService
+    private  auth: AuthService
   ) {
     this.preguntas = [];
-    this.uidUser=auth.getUid()!;
+  //  this.uidUser=auth.getUid()!;
   }
 
   ngOnInit() { }
 
   ionViewWillEnter() {
-  
+   this.uid = this.auth.getUid()!;
+   console.log("uid",this.uid);
     this.obtenerDia();
     this.obtenerPreguntas();
 
@@ -83,8 +85,8 @@ export class TrivialPage implements OnInit {
   /************************/
 
   controlTiradas(){
-    console.log("contestadas: ",this.preguntasContestadas)
-    console.log("preguntas:",this.preguntas.length)
+ //   console.log("contestadas: ",this.preguntasContestadas)
+ //   console.log("preguntas:",this.preguntas.length)
     if(this.preguntasContestadas >= this.preguntas.length){
       this.abrirModal = true;
     }else{
@@ -100,7 +102,7 @@ export class TrivialPage implements OnInit {
     this.trivialSvc.getPreguntas(this.diaSemana).subscribe({
       next: (res: any) => {
         ////console.log(this.pregunta.indiceRespuesta);
-        console.log("getPreguntas:",res);
+      //  console.log("getPreguntas:",res);
         //Almacenamos las preguntas en el array preguntas
         this.preguntas = res;
         //Cerramos la espera
@@ -116,16 +118,16 @@ export class TrivialPage implements OnInit {
 
   //Funcion para obtener la pregunta del array
   obtenerPregunta() {
-  console.log("getPreguntas",this.preguntas);
+  //console.log("getPreguntas",this.preguntas);
     //Utilizamos el numero de intentos para recorrer el array
     this.pregunta = this.preguntas[this.numeroIntentos];
- console.log('pregunta',this.pregunta);
+ //console.log('pregunta',this.pregunta);
     //Almacenamos las respuestas posibles
     this.respuestas = this.pregunta.respuestas;
  //   //console.log('respuestas',this.respuestas);
     //Encontramos la respuesta correcta mediante el indice
     this.indice = this.pregunta.indiceRespuesta;
-  console.log('indice: ',this.indice);
+ // console.log('indice: ',this.indice);
     //Almacenamos la respuesta correcta
     this.respuestaCorrecta = this.respuestas[this.indice];
   //  //console.log('respuestaCorrecta',this.respuestaCorrecta);
@@ -140,9 +142,9 @@ export class TrivialPage implements OnInit {
   responder(r: string) {
     this.numeroIntentos = this.numeroIntentos + 1;
     this.respuestaUsuario = r;
-   console.log(
-     "Has respondido con la opcion: " + r + " Intentos: " + this.numeroIntentos + " Opt Correcta: " + this.respuestaCorrecta
-   );
+  //  console.log(
+  //    "Has respondido con la opcion: " + r + " Intentos: " + this.numeroIntentos + " Opt Correcta: " + this.respuestaCorrecta
+  //  );
     this.comprobarRespuesta();    
     //Deberiamos reiniciar el numero de intentos cuando termine la longitud del array de preguntas
     if (this.numeroIntentos > this.preguntas.length - 1) {
@@ -253,23 +255,28 @@ export class TrivialPage implements OnInit {
 
   // Añadir jugada
   async addTirada() {
-    //console.log(this.preguntas)
+   // console.log(this.preguntas)
+   console.log("uid:",this.uid)
     const tiradita: TiradaTrivial = {
-      idJugador: this.uidUser,
+      idJugador: this.uid,
       idPregunta: this.numeroIntentos,
       respuesta: this.respuestaUsuario,
       esCorrecta: this.preguntaAcertada
     };
-    //console.log(tiradita);
-    const response = await this.trivialSvc.addTirada(tiradita)
+    console.log(tiradita);
+    this.trivialSvc.addTirada(tiradita).then((s)=>{
+      console.log("response:",s )
+
+    })
     ////console.log(response)
   }
 
   async obtenerJugadas(){
     const fechaJugada = this.datePipe.transform(new Date(), this.formatoFecha)?.replace(/\//g, "")!;
-    let uidNumber = parseInt(this.uidUser);
+    
+    //let uidNumber = parseInt(this.uidUser);
     //console.log('hola jugadas: ')
-    this.trivialSvc.getJugada(uidNumber, fechaJugada).subscribe((data) => {
+    this.trivialSvc.getJugada(this.uid, fechaJugada).subscribe((data) => {
       this.tiradas = data;
       console.log("getJugada;",this.tiradas);
       this.controlTiradas();
