@@ -1,5 +1,6 @@
 export interface Jugador {
-    idJugador: number;
-    email: string;
-    indicadorPregunta : number
+    //idJugador: number;
+    nombre: string;
+    fechaNacimiento : string;
+    //indicadorPregunta : number
 }

@@ -1,0 +1,29 @@
+<ion-content [fullscreen]="true">
+  <app-mimenu />
+  <ion-content class="ion-page" id="main-content">
+    <app-miheader />
+  <ion-title class="ion-text-center">Ranking</ion-title>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" [disabled]="activeD" (click)="activarD()">Dia</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full"  [disabled]="activeM" (click)="activarM()">Semana</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full"  [disabled]="activeA" (click)="activarA()">Global</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-lista-puntos [listaEntrada]="listaPuntosFinal" *ngIf="listaPuntosFinal.length > 0; else noData"></app-lista-puntos>
+</ion-content>
+
+<ng-template #noData>
+  <h3 class="ion-text-center">
+    <ion-icon name="cloud-offline-outline"></ion-icon>
+    No hay datos disponibles
+    <ion-icon name="cloud-offline-outline"></ion-icon>
+  </h3>
+</ng-template>
+

@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+  <div *ngIf="datosEditar != undefined">
+
+    <ion-title id="title_css">Editar perfil</ion-title>
+    <ion-card id="card_css">
+
+      <ion-item>
+        <!-- <ion-input [(ngModel)]="nombre" contenteditable="true" placeholder="{{datosEditar.nombre}}">Nombre</ion-input> -->
+        <ion-text>Nombre</ion-text>
+        <ion-button (click)="guardarNombre()" id="boton_editar_nombre_css"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+      </ion-item>
+
+      <!-- <ion-item id="item_css"> -->
+      <!-- <ion-input [(ngModel)]="fechaNacimiento" contenteditable="true" placeholder="{{datosEditar.fechaNacimiento}}">Fecha de nacimiento</ion-input> -->
+      <!-- </ion-item> -->
+
+      <ion-item id="item_css">
+        <ion-text>Cambiar la contraseña</ion-text>
+        <ion-button id="boton_editar_css" (click)="cambiarPassword()"><ion-icon name="pencil-outline"></ion-icon></ion-button>
+      </ion-item>
+
+      <ion-item id="item_css">
+        <ion-button color="warning" (click)="borrarCuenta()">Borrar cuenta</ion-button>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

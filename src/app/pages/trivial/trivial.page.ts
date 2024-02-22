@@ -59,6 +59,7 @@ export class TrivialPage implements OnInit {
   
   }
 
+
   //Obtener el id del usuario autentificado
   // getIdUser() {
   //   const auth = getAuth();
@@ -320,6 +321,7 @@ export class TrivialPage implements OnInit {
   //Ale podemos guardar directamente el id de firebase
   //¿Qué guardamos en la tirada?
 
+      
 
 
 

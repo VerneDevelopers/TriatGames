@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { sha256 } from 'js-sha256';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-avatar',
@@ -9,19 +10,23 @@ import { sha256 } from 'js-sha256';
 })
 export class AvatarComponent implements OnInit {
 
-  @Input() correo: string = ''
-  avatarURL: string = '';
 
+  avatarURL: string = '';
+  correo="";
   ngOnInit() { 
-    this.getGravatarUrl(this.correo);
+    this.auth.getUserProfile().subscribe((user)=>{
+      this. correo = user.email;
+      this.getGravatarUrl(this.correo);
+    });
+  
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private auth:AuthService) {
   }
 
   getGravatarUrl(email: string): void {
     const hash = sha256(email.trim().toLowerCase());
-    console.log(this.correo)
+  
     const gravatarUrl = `https://www.gravatar.com/avatar/${hash}?d=404`;
 
     this.http.head(gravatarUrl, { observe: 'response' }).subscribe(
