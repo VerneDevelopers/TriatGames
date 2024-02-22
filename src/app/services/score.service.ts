@@ -13,6 +13,7 @@ export class ScoreService {
   constructor(private afs: AngularFirestore, private datePipe: DatePipe) {
     this.puntuacionVacia = {
       "idUsuario": '',
+      "nombreUsuario": '',
       "ptsWordle": 0,
       "ptsAhorcado": 0,
       "ptsTrivial": 0,
@@ -22,7 +23,7 @@ export class ScoreService {
 
 
   //addPoints(idusuario,fecha,idJuego,ganador/perdedor)
-  addPoints(idUsuario: string, fecha: Date, idJuego: string, ganado: boolean) {
+  addPoints(idUsuario: string, nombreUsuario:string, fecha: Date, idJuego: string, ganado: boolean) {
     const fechaHoy = this.datePipe.transform(fecha, this.formatoFecha)?.replace(/\//g, "")!;
     const idSemana = this.obtenerRangoDeSemana(fecha);
     const puntosGanados = ganado ? 3 : 1;
@@ -55,6 +56,7 @@ export class ScoreService {
             return;
         }
         puntuacion.idUsuario = idUsuario;
+        puntuacion.nombreUsuario = nombreUsuario;
         puntuacion.ptsTotales += puntosGanados;
 
         this.afs.collection(coleccion).doc(idUsuario).set(puntuacion);

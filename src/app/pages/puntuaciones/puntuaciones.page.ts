@@ -24,25 +24,25 @@ export class PuntuacionesPage implements OnInit {
           switch (this.juego) {
             case "global":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTotales
               })
               break;
             case "Wordle":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsWordle
               })
               break;
             case "Ahorcado":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsAhorcado
               })
               break;
             case "Trivial":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTrivial
               })
               break;
@@ -79,25 +79,25 @@ export class PuntuacionesPage implements OnInit {
           switch (this.juego) {
             case "global":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTotales
               })
               break;
             case "Wordle":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsWordle
               })
               break;
             case "Ahorcado":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsAhorcado
               })
               break;
             case "Trivial":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTrivial
               })
               break;
@@ -114,29 +114,30 @@ export class PuntuacionesPage implements OnInit {
     this.activeA = false;
     this.serv.scoreWeek(new Date()).subscribe(
       resp => {
+        console.log("respuesta:",resp)
         for (const p of resp) {
           switch (this.juego) {
             case "global":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTotales
               })
               break;
             case "Wordle":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsWordle
               })
               break;
             case "Ahorcado":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsAhorcado
               })
               break;
             case "Trivial":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTrivial
               })
               break;
@@ -155,29 +156,30 @@ export class PuntuacionesPage implements OnInit {
     this.activeA = !this.activeA;
     this.serv.scoreWorld().subscribe(
       resp => {
+        console.log("respuesta:",resp)
         for (const p of resp) {
           switch (this.juego) {
             case "global":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTotales
               })
               break;
             case "Wordle":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsWordle
               })
               break;
             case "Ahorcado":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsAhorcado
               })
               break;
             case "Trivial":
               this.listaPuntosFinal.push({
-                "name": p.idUsuario,
+                "name": p.nombreUsuario,
                 "puntuacion": p.ptsTrivial
               })
               break;
