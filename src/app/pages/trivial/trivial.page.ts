@@ -9,17 +9,22 @@ import { TrivialService } from 'src/app/services/trivial.service';
 })
 export class TrivialPage implements OnInit {
 
-
+  preguntasRecibidas !: PreguntaTrivial[];
   
 
-  constructor() {
+  constructor(private trivialService : TrivialService) {
     
   }
 
   ngOnInit() {
-    
+    this.getAll();
   }
 
-  
+  getAll(){
+    this.trivialService.getPreguntas().subscribe(respuesta => {
+      this.preguntasRecibidas = respuesta
+    })
+    
+  }
 
 }

@@ -39,13 +39,18 @@ const routes: Routes = [
   {
     path: 'wordle',
     loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule),
-        ...canActivate(redirectUnauthorizedToLogin)
-
+    ...canActivate(redirectUnauthorizedToLogin)
   },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+   },
   {
     path: 'puntuaciones',
     loadChildren: () => import('./pages/puntuaciones/puntuaciones.module').then( m => m.PuntuacionesPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
+
 
   }
 
