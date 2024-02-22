@@ -7,13 +7,39 @@ import {
   sendPasswordResetEmail,
   UserCredential
 } from '@angular/fire/auth';
+import { Firestore, doc, docData, setDoc } from '@angular/fire/firestore';
+import { IUsuario } from '../interfaces/usuario';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth,private firestore: Firestore) {
 
+  }
+  getUserProfile():Observable<IUsuario>  {
+    const user = this.auth.currentUser!;
+    const userDocRef = doc(this.firestore, `users/${user.uid}`);
+    return docData(userDocRef) as Observable<IUsuario>;
+    
+  }
+
+
+  async saveProfile(name: string) {
+    try {
+      const user = this.auth.currentUser!;
+      const userDocRef = doc(this.firestore, `users/${user.uid}`);
+      await setDoc(userDocRef, {
+        "id": user.uid, // "id" : "user.uid
+        "email" : user.email,
+        "name": name
+      });
+      return true;
+    } catch (e) {
+      return null;
+    }
   }
 
   getUid() {
@@ -26,9 +52,10 @@ export class AuthService {
     }
   }
 
-  async register(email: string, password: string): Promise<UserCredential | null> {
+  async register(email: string, password: string,name:string): Promise<UserCredential | null> {
     try {
       const user = await createUserWithEmailAndPassword(this.auth, email, password);
+      this.saveProfile(name)
       return user;
     } catch (e) {
       //  console.log('ha fallado el registro',e);
