@@ -18,7 +18,7 @@
 
   <ion-grid>
     <!--Ejemplo de pasos por parametro y cambios de color-->
-    <wordle-row *ngFor="let palabra of palabrasIntentos" [palabra]="palabra" [aciertos]="aciertos(palabra)"></wordle-row>
+    <wordle-row *ngFor="let palabra of palabrasIntentos" [palabra]="palabra.palabra" [aciertos]="aciertos(palabra.palabra)"></wordle-row>
     
 
   </ion-grid>

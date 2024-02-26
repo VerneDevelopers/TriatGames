@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 //import { getDocs, QuerySnapshot, DocumentData } from 'firebase/firestore';
 import { Firestore, collectionData, collection, doc, setDoc, deleteDoc, docSnapshots } from '@angular/fire/firestore';
+import { PalabraWordle } from '../interfaces/palabraWordle';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,12 @@ export class ServicioWordleService {
 
   constructor(private firestore: Firestore) { }
 
-  calcularRespuesta(palabra: string): string {
+  async calcularRespuesta(palabra: string): Promise<string> {
     palabra = palabra.toUpperCase()
 
-    var palabradeldia = this.palabraDia()
+    const palabraDelDia = await this.palabraDia();
+    const palabradeldia = palabraDelDia.toUpperCase();
 
-    palabradeldia = palabradeldia.toUpperCase()
 
     var paD: string[] = []
     var paI: string[] = []
@@ -48,12 +49,15 @@ export class ServicioWordleService {
       map(palabras => palabras)
     );
   }*/
-  palabrasDiaFire() : Observable<any[]> {
+  palabrasDiaFire(): Observable<PalabraWordle[]> {
     const coleccion = collection(this.firestore, 'palabrasWordle');
-    return collectionData(coleccion, { idField: 'id' });
+    return collectionData(coleccion, { idField: 'id' })
+    .pipe(
+      map(palabras => palabras as PalabraWordle[])
+    );
   }
   
-  palabraDia() : string {
+  async palabraDia(): Promise<string> {
     const opcionesDeFormato: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "2-digit",
@@ -64,17 +68,20 @@ export class ServicioWordleService {
 
     var palabra = ""
 
-    var pas = this.palabrasDiaFire().subscribe(
-      resp => {
-        for(var i = 0; i <= resp.length;i++) {
-          if (resp[i]) {
-            if (fechaString == resp[i].fecha) {
-              palabra = resp[i].palabra
+    const promesaPalabrasDia = new Promise<string>((resolve) => {
+      this.palabrasDiaFire().subscribe(
+        resp => {
+          for (let i = 0; i < resp.length; i++) {
+            if (resp[i] && fechaString === resp[i].fecha) {
+              palabra = resp[i].palabra;
             }
           }
+          resolve(palabra);
         }
-      }
-    )
+      );
+    });
+  
+    palabra = await promesaPalabrasDia;
 
     if (palabra == "") {
       palabra = "Hoy no hay palabra"
@@ -93,7 +100,7 @@ export class ServicioWordleService {
     return setDoc(documentRef, data);
 }
 
-  misJugadas(userId: string, fecha: string): Observable<any[]> {
+  misJugadas(userId: string, fecha: string): Observable<PalabraWordle[]> {
     const document = collection(this.firestore, `${userId}/Wordle/${fecha}/`);
     return collectionData(document, { idField: 'id' })
       .pipe(
