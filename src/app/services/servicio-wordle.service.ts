@@ -31,9 +31,9 @@ export class ServicioWordleService {
 
       if (paD[i] == paI[i]) {
         respu += "V"
-      }else if (paD.includes(paI[i])) {
+      } else if (paD.includes(paI[i])) {
         respu += "A"
-      }else {
+      } else {
         respu += "G"
       }
 
@@ -52,11 +52,11 @@ export class ServicioWordleService {
   palabrasDiaFire(): Observable<PalabraWordle[]> {
     const coleccion = collection(this.firestore, 'palabrasWordle');
     return collectionData(coleccion, { idField: 'id' })
-    .pipe(
-      map(palabras => palabras as PalabraWordle[])
-    );
+      .pipe(
+        map(palabras => palabras as PalabraWordle[])
+      );
   }
-  
+
   async palabraDia(): Promise<string> {
     const opcionesDeFormato: Intl.DateTimeFormatOptions = {
       year: "numeric",
@@ -64,7 +64,7 @@ export class ServicioWordleService {
       day: "2-digit"
     };
     var fecha = new Date();
-    var fechaString : string = fecha.toLocaleString("es-ES", opcionesDeFormato);
+    var fechaString: string = fecha.toLocaleString("es-ES", opcionesDeFormato);
 
     var palabra = ""
 
@@ -80,7 +80,7 @@ export class ServicioWordleService {
         }
       );
     });
-  
+
     palabra = await promesaPalabrasDia;
 
     if (palabra == "") {
@@ -90,21 +90,55 @@ export class ServicioWordleService {
     return palabra;
   }
 
-  addJugada(userId:string, palabra:string, fecha: string) {
-    const documentRef = doc(collection(this.firestore, `${userId}/Wordle/${fecha}`));
-
-    const data = {
-        palabra
+  addJugada(userId: string, palabra: string) {
+    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
     };
+    var fecha = new Date();
+    var fechaString: string = fecha.toLocaleString("es-ES", opcionesDeFormato);
 
-    return setDoc(documentRef, data);
-}
+    const documentRef = doc(collection(this.firestore, `Wordle/${userId}/${fechaString}`));
+
+    var jugadas
+
+    this.misJugadas(userId, fechaString).subscribe(
+      async resp => {
+        jugadas = resp
+
+        if (!jugadas) {
+          const palabrita: PalabraWordle = {
+            fecha: fechaString,
+            palabra: palabra,
+            respuesta: await this.calcularRespuesta(palabra)
+          }
+
+          const palabraVacia: PalabraWordle = {
+            fecha: fechaString,
+            palabra: '',
+            respuesta: ''
+          }
+          jugadas = [palabrita, palabraVacia, palabraVacia, palabraVacia, palabraVacia, palabraVacia]
+        } else {
+          jugadas.forEach(async j => {
+            if (j.palabra == "") {
+              j.palabra = palabra;
+              j.respuesta = await this.calcularRespuesta(palabra)
+            }
+          });
+        }
+        return setDoc(documentRef, jugadas);
+
+      }
+    );
+  }
 
   misJugadas(userId: string, fecha: string): Observable<PalabraWordle[]> {
-    const document = collection(this.firestore, `${userId}/Wordle/${fecha}/`);
+    const document = collection(this.firestore, `Wordle/${userId}/${fecha}`);
     return collectionData(document, { idField: 'id' })
       .pipe(
-        map(palabras => palabras as any[])
+        map(palabras => palabras as PalabraWordle[])
       );
   }
 
