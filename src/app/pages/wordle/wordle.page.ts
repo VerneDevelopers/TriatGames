@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { PalabraWordle } from 'src/app/interfaces/palabraWordle';
 import { AuthService } from 'src/app/services/auth.service';
 import { ServicioWordleService } from 'src/app/services/servicio-wordle.service';
 
@@ -11,7 +10,7 @@ import { ServicioWordleService } from 'src/app/services/servicio-wordle.service'
 })
 export class WordlePage {
 
-  palabrasIntentos: PalabraWordle[] = [];
+  palabrasIntentos = ['','','','','',''];
   mostrarInput = true;
   mostrarMensajeGana = false;
   mostrarMensajePierde = false;
@@ -43,20 +42,12 @@ export class WordlePage {
     this.uid = this.authServ.getUid() ?? '';
 
     this.wordleServ.misJugadas(this.uid, this.fechaActual).subscribe({
-      next: (palabras: PalabraWordle[]) => {
-        if (palabras.length != 0) {
-          this.palabrasIntentos = palabras;
-          if (this.palabrasIntentos[5] && this.wordleServ.calcularRespuesta(this.palabrasIntentos[5].palabra) != "VVVVV") {
-            this.mostrarInput = false;
-            this.mostrarMensajePierde = true;
-          } 
-        } else {
-          const palabraVacia: PalabraWordle = {
-            fecha: this.fechaActual,
-            palabra: ''
-          }
-          this.palabrasIntentos = [palabraVacia, palabraVacia, palabraVacia, palabraVacia, palabraVacia, palabraVacia]
-        }
+      next: (palabras: any[]) => {
+        this.palabrasIntentos = palabras;
+        if (this.palabrasIntentos[5] != '' && this.palabrasIntentos[5] != "VVVVV") {
+          this.mostrarInput = false;
+          this.mostrarMensajePierde = true;
+        } 
       }
     }) 
   }
