@@ -1,9 +1,15 @@
-ion-title{
+.titulo{
     padding: 0;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
 }
 .nombre {
     padding-left: 1em;
     font-weight: bold;
     font-size: large;
     display: inline;
+}
+
+.header{
+    padding: 0.25em;
 }
