@@ -16,7 +16,7 @@
       <ion-row class="ion-align-items-center">
         <!-- Boton wordle -->
         <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="success" routerLink = "/wordle" (click)="entradaWordleTrue()">
+          <ion-card color="success" href="/wordle" (click)="entradaWordleTrue()">
             <ion-card-header class="header">
               <ion-card-title *ngIf="entradaWordle">
                 <ion-label class="visto">Wordle</ion-label>
@@ -29,7 +29,7 @@
         </ion-col>
         <!-- Boton trivial-->
         <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="secondary" routerLink = "/trivial" (click)="entradaTrivialTrue()">
+          <ion-card color="secondary" href="/trivial" (click)="entradaTrivialTrue()">
             <ion-card-header>
               <ion-card-title *ngIf="entradaTrivial">
                 <ion-label class="visto">Trivial</ion-label>
@@ -46,7 +46,7 @@
       <ion-row class="ion-align-items-center">
         <!-- Boton ahorcado -->
         <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="primary" routerLink = "/ahorcado" (click)="entradaAhorcadoTrue()">
+          <ion-card color="primary" href="/ahorcado" (click)="entradaAhorcadoTrue()">
             <ion-card-header>
               <ion-card-title *ngIf="entradaAhorcado">
                 <ion-label class="visto">Ahorcado</ion-label>
@@ -59,7 +59,7 @@
         </ion-col>
         <!--Botón puntuaciones -->
         <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="danger" routerLink = "/puntuaciones" (click)="entradaPuntuacionesTrue()">
+          <ion-card color="danger" href="/puntuaciones" (click)="entradaPuntuacionesTrue()">
             <ion-card-header>
               <ion-card-title *ngIf="entradaPuntuaciones">
                 <ion-label class="visto">Puntuaciones</ion-label>
