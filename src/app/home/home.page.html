@@ -10,67 +10,44 @@
     <div *ngIf="abrirModal">
       <app-abrir-modal-fin resultado="{{resultado}}" />
     </div> -->
+    <div class="container">
+      <ion-grid class="ion-align-self-center">
+        <!--Fila 1 -->
+        <ion-row class="ion-align-items-center">
+          <!-- Boton wordle -->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaWordle" href="/wordle" (click)="entradaWordleTrue()"
+              class="btn-juego btn-wordle-visto" fill="clear" />
+            <ion-button *ngIf="!entradaWordle" href="/wordle" (click)="entradaWordleTrue()" class="btn-juego btn-wordle"
+              fill="clear" />
+          </ion-col>
+          <!-- Boton trivial-->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaTrivial" href="/trivial" (click)="entradaTrivialTrue()"
+              class="btn-juego btn-trivial-visto" fill="clear" />
+            <ion-button *ngIf="!entradaTrivial" href="/trivial" (click)="entradaTrivialTrue()"
+              class="btn-juego btn-trivial" fill="clear" />
+          </ion-col>
+        </ion-row>
 
-    <ion-grid class="ion-align-self-center">
-      <!--Fila 1 -->
-      <ion-row class="ion-align-items-center">
-        <!-- Boton wordle -->
-        <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="success" href="/wordle" (click)="entradaWordleTrue()">
-            <ion-card-header class="header">
-              <ion-card-title *ngIf="entradaWordle">
-                <ion-label class="visto">Wordle</ion-label>
-              </ion-card-title>
-              <ion-card-title *ngIf="!entradaWordle">
-                <ion-label>Wordle</ion-label>
-              </ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-        <!-- Boton trivial-->
-        <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="secondary" href="/trivial" (click)="entradaTrivialTrue()">
-            <ion-card-header>
-              <ion-card-title *ngIf="entradaTrivial">
-                <ion-label class="visto">Trivial</ion-label>
-              </ion-card-title>
-              <ion-card-title *ngIf="!entradaTrivial">
-                <ion-label>Trivial</ion-label>
-              </ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-
-      <!--Fila 2 -->
-      <ion-row class="ion-align-items-center">
-        <!-- Boton ahorcado -->
-        <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="primary" href="/ahorcado" (click)="entradaAhorcadoTrue()">
-            <ion-card-header>
-              <ion-card-title *ngIf="entradaAhorcado">
-                <ion-label class="visto">Ahorcado</ion-label>
-              </ion-card-title>
-              <ion-card-title *ngIf="!entradaAhorcado">
-                <ion-label>Ahorcado</ion-label>
-              </ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-        <!--Botón puntuaciones -->
-        <ion-col size="6" class="ion-text-center boton-juego">
-          <ion-card color="danger" href="/puntuaciones" (click)="entradaPuntuacionesTrue()">
-            <ion-card-header>
-              <ion-card-title *ngIf="entradaPuntuaciones">
-                <ion-label class="visto">Puntuaciones</ion-label>
-              </ion-card-title>
-              <ion-card-title *ngIf="!entradaPuntuaciones">
-                <ion-label>Puntuaciones</ion-label>
-              </ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+        <!--Fila 2 -->
+        <ion-row class="ion-align-items-center">
+          <!-- Boton ahorcado -->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaAhorcado" href="/ahorcado" (click)="entradaAhorcadoTrue()"
+              class="btn-juego btn-ahorcado-visto" fill="clear" />
+            <ion-button *ngIf="!entradaAhorcado" href="/ahorcado" (click)="entradaAhorcadoTrue()"
+              class="btn-juego btn-ahorcado" fill="clear" />
+          </ion-col>
+          <!--Botón puntuaciones -->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaPuntuaciones" href="/puntuaciones" (click)="entradaPuntuacionesTrue()"
+              class="btn-juego btn-puntuaciones-visto" fill="clear" />
+            <ion-button *ngIf="!entradaPuntuaciones" href="/puntuaciones" (click)="entradaPuntuacionesTrue()"
+              class="btn-juego btn-puntuaciones" fill="clear" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-content>
 </ion-content>
