@@ -1,0 +1,51 @@
+<app-mimenu />
+<ion-content [fullscreen]="true">
+  <app-miheader />
+  <div>
+    <ion-row>
+      <ion-col offset-lg="3" offset-md="3" offset="0" size="12" size-lg="6" size-md="6">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title><ion-avatar>
+                <ion-img src="../../../assets/imgMembers/bernat.jpeg"></ion-img>
+              </ion-avatar>
+              <a href="https://github.com/bernat13" target="_blank"><ion-icon name="logo-Github"></ion-icon></a>
+              Bernat Costa Reimóndez</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Jefe de proyecto
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6" size-lg="3" *ngFor="let item of items">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>
+                <ion-avatar>
+                  <ion-img [src]="item.imageUrl"></ion-img>
+                </ion-avatar>
+                <a [href]="item.urlGit" target="_blank"><ion-icon name="logo-Github"></ion-icon></a>
+                {{item.nombre}}
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{item.ocupacion}}
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <p>Somos un grupo de estudiantes de programación que hemos desarrollado una aplicación llamada TriatGames. Se trata
+      de una aplicación que contiene tres juegos: ahorcado, trivial y wordle. Disfruta de nuevos retos cada día y
+      compite con gente de todo el mundo para ver quién es el mejor.
+      Nuestro objetivo es ofrecer una experiencia divertida y educativa a los usuarios, para que puedan aprender algo
+      nuevo mientras se entretienen. La aplicación está disponible para Android, y se puede descargar gratuitamente
+      desde las tiendas oficiales. Esperamos que disfruten de nuestro trabajo y que nos envíen sus comentarios y
+      sugerencias.
+    </p>
+  </div>
+</ion-content>

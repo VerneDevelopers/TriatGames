@@ -39,7 +39,13 @@ const routes: Routes = [
   {
     path: 'wordle',
     loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule)
+  },
+  {
+    path: 'who-are',
+    loadChildren: () => import('./pages/who-are/who-are.module').then( m => m.WhoArePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   }
+
 
 ];
 
