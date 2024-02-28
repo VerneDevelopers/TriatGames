@@ -3,4 +3,6 @@ export interface PreguntaTrivial {
     preguntaEnunciado: string;
     respuestas: string [];
     indiceRespuesta : number;
+    categoria : string; 
 }
+ 

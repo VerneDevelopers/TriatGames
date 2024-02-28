@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TrivialPageRoutingModule } from './trivial-routing.module';
+import { PuntuacionesPageRoutingModule } from './puntuaciones-routing.module';
 
-import { TrivialPage } from './trivial.page';
+import { PuntuacionesPage } from './puntuaciones.page';
 import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    TrivialPageRoutingModule,
+    PuntuacionesPageRoutingModule,
     ComponentsModule
   ],
-  declarations: [TrivialPage]
+  declarations: [PuntuacionesPage]
 })
-export class TrivialPageModule {}
+export class PuntuacionesPageModule {}
