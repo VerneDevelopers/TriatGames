@@ -1,18 +1,24 @@
-<ion-header>
-  <ion-toolbar color="primary">
+<ion-header >
+  <ion-toolbar color="primary"class="header">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
       <!--Botón de retroceso-->
-      <ion-back-button defaultHref="#"></ion-back-button>
+      <!-- <ion-back-button defaultHref="#"></ion-back-button> -->
     </ion-buttons>
     <!--Saludo al usuario-->
     <!--Pendiente de implementar completamente con FireBase-->
-    <ion-title>
-      <ion-label>Hola {{name}}</ion-label> 
-      <app-avatar></app-avatar>
-    
+    <ion-buttons>
+    <ion-title class="titulo">
+      <ion-item color="primary" lines="none">
+        <app-avatar class="avatar" />
+        <ion-label class="nombre">Hola {{name}}</ion-label>
+      </ion-item>
     </ion-title>
     <!--Botón de deslogueo pendiente de implementar-->
-    <ion-button slot="end" (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></ion-button>
+    
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>

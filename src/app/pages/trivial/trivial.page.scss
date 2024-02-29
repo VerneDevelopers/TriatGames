@@ -1,6 +1,19 @@
 .header-container {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 20px;
-  }
-  
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+.icon-trivial{
+  margin: 0.5em;
+}
+
+.marcador {
+  width: fit-content;
+  margin: auto;
+  margin-top: 1em;
+  border: 0.2em solid var(--ion-color-light);
+  background-color: rgba(60,60,60, 0.05);
+  border-radius: 1em;
+  box-shadow: 0.25em 0.25em 0.4em rgba(0, 0, 0, 0.25);
+}
