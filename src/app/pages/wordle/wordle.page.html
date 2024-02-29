@@ -22,6 +22,6 @@
   <ion-input *ngIf="mostrarInput" type="text" fill="outline" maxlength="5" minlength="5" placeholder="Introduce tu palabra" (keyup.enter)="agregarPalabra($event)"/>
 
   <div *ngIf="abrirModal">
-    <app-abrir-modal-fin resultado="{{resultado}}" />
+    <app-abrir-modal-fin resultado="{{resultado}}" idJuego="Wordle"/>
   </div>
 </ion-content>

@@ -35,6 +35,10 @@
       </ion-item>
     </ion-list>
   </div>
+
+  <div *ngIf="abrirModal">
+    <app-abrir-modal-fin resultado="{{resultado}}" idJuego="Ahorcado"/>
+  </div>
 </ion-content>
 
 

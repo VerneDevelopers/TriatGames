@@ -8,7 +8,8 @@ import { FinJuegoComponent } from '../fin-juego/fin-juego.component';
   styleUrls: ['./abrir-modal-fin.component.scss'],
 })
 export class AbrirModalFinComponent  implements OnInit {
-  @Input() resultado = "perdido";
+  @Input() resultado = "";
+  @Input() idJuego = "";
   
   constructor(
     private modalController: ModalController,
@@ -28,6 +29,7 @@ export class AbrirModalFinComponent  implements OnInit {
       component: FinJuegoComponent,
       componentProps: {
         resultado: res,
+        juego: this.idJuego
       },
       canDismiss: true,
       presentingElement: this.routerOutlet.nativeEl
