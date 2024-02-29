@@ -8,17 +8,8 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- NOTAS PARA EL QUE VENGA TRAS DE MÍ -->
-  <!-- 1. ¡Hola compi/Bernat!-->
-  <!-- 2. Las filas están pensadas para ser sustituidas por un *ngFor-->
-  <!-- 3. Los parametros de wordle-row para que sean variables-->
-  <!-- 4. Así también, tanto los mensajes como el input lo he hecho pensando en que sean controlados por un ngIf-->
-  <!-- 5. ¡Suerte! -->
-  <!-- Att. Manu-->
-
   <ion-grid>
-    <!--Ejemplo de pasos por parametro y cambios de color-->
-    <wordle-row *ngFor="let palabra of palabrasIntentos" [palabra]="palabra" [aciertos]="aciertos(palabra)"></wordle-row>
+    <wordle-row *ngFor="let palabra of palabrasIntentos" [palabra]="palabra.palabra" [aciertos]="palabra.respuesta"></wordle-row>
     
 
   </ion-grid>
@@ -28,7 +19,9 @@
   <div class="mensajeGana" *ngIf="mostrarMensajeGana">
     <ion-label>¡Enhorabuena, has acertado la palabra de hoy!</ion-label>
   </div>
-  <!--Input para introducir las palabras-->
   <ion-input *ngIf="mostrarInput" type="text" fill="outline" maxlength="5" minlength="5" placeholder="Introduce tu palabra" (keyup.enter)="agregarPalabra($event)"/>
 
+  <div *ngIf="abrirModal">
+    <app-abrir-modal-fin resultado="{{resultado}}" />
+  </div>
 </ion-content>
