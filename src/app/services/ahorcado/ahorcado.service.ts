@@ -49,7 +49,7 @@ export class AhorcadoService {
     return this.afs.collection<Data>(`${userId}/Ahorcado/${fechaFormato}`).valueChanges();
   }
 
-  getPalabraDia(userId: string, fecha: Date): Observable<Data[]> {
+  getPalabraDia( fecha: Date): Observable<Data[]> {
     const opcionesDeFormato: Intl.DateTimeFormatOptions = {
       year: "numeric",
       month: "2-digit",
@@ -58,7 +58,7 @@ export class AhorcadoService {
 
     const fechaFormato: string = fecha.toLocaleString("es-ES", opcionesDeFormato)
       .split('/').reverse().join('/');
-    return this.afs.collection<Data>(`Ahorcado/${fechaFormato}`).valueChanges();
+    return this.afs.collection<Data>(`Ahorcado/palabra/${fechaFormato}`).valueChanges();
   }
 
 }
