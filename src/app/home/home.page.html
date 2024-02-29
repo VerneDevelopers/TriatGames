@@ -10,45 +10,44 @@
     <div *ngIf="abrirModal">
       <app-abrir-modal-fin resultado="{{resultado}}" />
     </div> -->
+    <div class="container">
+      <ion-grid class="ion-align-self-center">
+        <!--Fila 1 -->
+        <ion-row class="ion-align-items-center">
+          <!-- Boton wordle -->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaWordle" href="/wordle" (click)="entradaWordleTrue()"
+              class="btn-juego btn-wordle-visto" fill="clear" />
+            <ion-button *ngIf="!entradaWordle" href="/wordle" (click)="entradaWordleTrue()" class="btn-juego btn-wordle"
+              fill="clear" />
+          </ion-col>
+          <!-- Boton trivial-->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaTrivial" href="/trivial" (click)="entradaTrivialTrue()"
+              class="btn-juego btn-trivial-visto" fill="clear" />
+            <ion-button *ngIf="!entradaTrivial" href="/trivial" (click)="entradaTrivialTrue()"
+              class="btn-juego btn-trivial" fill="clear" />
+          </ion-col>
+        </ion-row>
 
-    <ion-grid class="ion-align-self-center">
-      <ion-row class="ion-align-items-center">
-        <ion-col size="6" class="ion-text-center">
-          <ion-card color="success" routerLink = "/wordle"><!-- (click)="entradaWordleTrue()"-->
-            <ion-card-header>
-              <ion-card-title *ngIf="entradaWordle"><label class="visto">Wordle</label></ion-card-title>
-              <ion-card-title *ngIf="!entradaWordle">Wordle</ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-        <ion-col size="6" class="ion-text-center">
-          <ion-card color="secondary" routerLink = "/trivial" ><!--(click)="entradaTrivialTrue()" -->
-            <ion-card-header>
-              <ion-card-title *ngIf="entradaTrivial"><label class="visto">Trivial</label></ion-card-title>
-              <ion-card-title *ngIf="!entradaTrivial">Trivial</ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="6" class="ion-text-center">
-          <ion-card color="primary" routerLink = "/ahorcado"><!-- (click)="entradaAhorcadoTrue()"-->
-            <ion-card-header>
-              <ion-card-title *ngIf="entradaAhorcado"><label class="visto">Ahorcado</label></ion-card-title>
-              <ion-card-title *ngIf="!entradaAhorcado">Ahorcado</ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-        <ion-col size="6" class="ion-text-center">
-          <ion-card color="danger" routerLink = "/puntuaciones" (click)="entradaPuntuacionesTrue()">
-            <ion-card-header>
-              <ion-card-title *ngIf="entradaPuntuaciones"><label class="visto">Puntuaciones</label></ion-card-title>
-              <ion-card-title *ngIf="!entradaPuntuaciones">Puntuaciones</ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  
+        <!--Fila 2 -->
+        <ion-row class="ion-align-items-center">
+          <!-- Boton ahorcado -->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaAhorcado" href="/ahorcado" (click)="entradaAhorcadoTrue()"
+              class="btn-juego btn-ahorcado-visto" fill="clear" />
+            <ion-button *ngIf="!entradaAhorcado" href="/ahorcado" (click)="entradaAhorcadoTrue()"
+              class="btn-juego btn-ahorcado" fill="clear" />
+          </ion-col>
+          <!--Botón puntuaciones -->
+          <ion-col size="6" class="ion-text-center">
+            <ion-button *ngIf="entradaPuntuaciones" href="/puntuaciones" (click)="entradaPuntuacionesTrue()"
+              class="btn-juego btn-puntuaciones-visto" fill="clear" />
+            <ion-button *ngIf="!entradaPuntuaciones" href="/puntuaciones" (click)="entradaPuntuacionesTrue()"
+              class="btn-juego btn-puntuaciones" fill="clear" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-content>
 </ion-content>
