@@ -34,11 +34,11 @@ export class RegistroPage implements OnInit {
       //Almacenamos los valores que nos hacen falta
       const email = this.form.get('email')?.value;
       const password = this.form.get('password')?.value;
-
-      if (email && password) {
+      const nombre = this.form.get('name')?.value;
+      if (email && password && nombre) {
         try {
           // Utilizamos el método de registro del servicio AuthService de Oscar
-          const userCredential = await this.AuthSvc.register(email, password);
+          const userCredential = await this.AuthSvc.register(email, password,nombre);
           if (userCredential!=null) {
             // Si el registro es existoso, dirigimos al usuario al home
             this.router.navigateByUrl('home')

@@ -14,47 +14,28 @@
       <ion-icon name="football-outline" size="large" ></ion-icon> <!--color="success" se pone el color en funcion de si ha acertado o no-->
     </ion-item>
   </div>
-  <ion-grid class="ion-align-self-center">
-    <ion-row class="ion-align-items-center">
+  <ion-grid class="ion-align-self-center" *ngIf="pregunta.respuestas != undefined">
+    <ion-row class="ion-align-items-center"> 
       <ion-col size="12" class="ion-text-center">
         <ion-card color="light">
-          <ion-card-header>
-            <ion-card-title></ion-card-title>
+          <ion-card-header color="light">
+            <ion-card-title >{{pregunta.preguntaEnunciado}}</ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>
     <ion-row class="ion-align-items-center">
-      <ion-col size="6" class="ion-text-center">
-        <ion-card color="success">
+      <ion-col size="6" class="ion-text-center"  *ngFor="let r of pregunta.respuestas" size-lg="6" size-md="6" size-sm="12" size="12">
+        <ion-card color={{colorCategoria}}>
           <ion-card-header>
-            <ion-card-title>A) Nada</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6" class="ion-text-center">
-        <ion-card color="secondary">
-          <ion-card-header>
-            <ion-card-title>B) Nada</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-align-items-center">
-      <ion-col size="6" class="ion-text-center">
-        <ion-card color="primary">
-          <ion-card-header>
-            <ion-card-title>C) Nada</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-      <ion-col size="6" class="ion-text-center">
-        <ion-card color="danger">
-          <ion-card-header>
-            <ion-card-title>D) Nada</ion-card-title>
+            <ion-card-title (click)="responder(r)">{{r}}</ion-card-title>
           </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div *ngIf="abrirModal">
+    <app-abrir-modal-fin resultado="{{resultado}}" />
+  </div>
 </ion-content>
+
