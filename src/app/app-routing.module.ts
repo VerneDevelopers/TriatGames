@@ -40,6 +40,7 @@ const routes: Routes = [
     path: 'who-are',
     loadChildren: () => import('./pages/who-are/who-are.module').then( m => m.WhoArePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
+  },{
     loadChildren: () => import('./pages/wordle/wordle.module').then( m => m.WordlePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
