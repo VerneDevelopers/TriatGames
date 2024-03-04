@@ -26,3 +26,5 @@ A lo largo del curso, hemos adquirido una amplia gama de habilidades gracias a B
 
 Además, reconocemos que el trabajo en equipo no solo es fundamental para el éxito de este proyecto, sino que también es una habilidad esencial para nuestra futura carrera profesional. En el mundo laboral actual, la capacidad de colaborar eficazmente con otros es altamente valorada por las empresas. A través de este proyecto, no solo estamos desarrollando habilidades técnicas, sino también habilidades blandas como la comunicación efectiva, la resolución de conflictos y la capacidad de trabajar hacia un objetivo común. Estamos convencidos de que estas habilidades nos serán de gran utilidad en cualquier entorno laboral al que nos enfrentemos en el futuro.
 
+Descarga aquí:
+[text](https://www.mediafire.com/file/sqdw6iow04b96eq/TriatGames.apk/file)
