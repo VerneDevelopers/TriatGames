@@ -33,6 +33,8 @@ export class AhorcadoPage implements OnInit {
  ]
  ruta: string = "../../../assets/imgAhorcado/"
  indiceImagen: number = 0;
+ abrirModal = false;
+ resultado = "ganado";
  constructor(private serv: AhorcadoService, private auth: Auth) {
    if (this.auth.currentUser?.uid != null)
      this.userUid = this.auth.currentUser?.uid.toString()
@@ -100,7 +102,9 @@ export class AhorcadoPage implements OnInit {
 
 
    if (this.palabraDia === this.palabraOculta) {
-     console.log('Aquí se gana, pero no se donde ponerlo jijuji');
+    this.resultado = "ganado";
+    this.abrirModal = true;
+
 
 
 
