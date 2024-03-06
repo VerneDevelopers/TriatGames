@@ -9,9 +9,20 @@ import { IPuntuacion } from '../interfaces/i-puntuacion';
 })
 export class ScoreService {
   formatoFecha: string = 'dd/MM/yyyy'
-  puntuacionVacia!: IPuntuacion
+  //puntuacionVacia!: IPuntuacion
   constructor(private afs: AngularFirestore, private datePipe: DatePipe) {
-    this.puntuacionVacia = {
+    // this.puntuacionVacia = {
+    //   "idUsuario": '',
+    //   "nombreUsuario": '',
+    //   "ptsWordle": 0,
+    //   "ptsAhorcado": 0,
+    //   "ptsTrivial": 0,
+    //   "ptsTotales": 0
+    // }
+  }
+
+  getPuntuacionVacia():IPuntuacion{
+    var p : IPuntuacion = {
       "idUsuario": '',
       "nombreUsuario": '',
       "ptsWordle": 0,
@@ -19,8 +30,10 @@ export class ScoreService {
       "ptsTrivial": 0,
       "ptsTotales": 0
     }
-  }
+    return p
 
+
+  }
 
   //addPoints(idusuario,fecha,idJuego,ganador/perdedor)
   addPoints(idUsuario: string, nombreUsuario:string, fecha: Date, idJuego: string, ganado: boolean) {
@@ -38,7 +51,7 @@ export class ScoreService {
       const documentRef = this.afs.collection(coleccion).doc(idUsuario);
 
       documentRef.get().subscribe(snapshot => {
-        const puntuacion: IPuntuacion = snapshot.data() as IPuntuacion || this.puntuacionVacia;
+        const puntuacion: IPuntuacion = snapshot.data() as IPuntuacion || this.getPuntuacionVacia();
 
 
         switch (idJuego) {
