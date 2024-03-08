@@ -16,14 +16,14 @@
         <ion-row class="ion-align-items-center">
           <!-- Boton wordle -->
           <ion-col size="6" class="ion-text-center">
-            <ion-button *ngIf="entradaWordle" href="/wordle" (click)="entradaWordleTrue()"
+            <ion-button *ngIf="entradaWordle" 
               class="btn-juego btn-wordle-visto" fill="clear" />
             <ion-button *ngIf="!entradaWordle" href="/wordle" (click)="entradaWordleTrue()" class="btn-juego btn-wordle"
               fill="clear" />
           </ion-col>
           <!-- Boton trivial-->
           <ion-col size="6" class="ion-text-center">
-            <ion-button *ngIf="entradaTrivial" href="/trivial" (click)="entradaTrivialTrue()"
+            <ion-button *ngIf="entradaTrivial" 
               class="btn-juego btn-trivial-visto" fill="clear" />
             <ion-button *ngIf="!entradaTrivial" href="/trivial" (click)="entradaTrivialTrue()"
               class="btn-juego btn-trivial" fill="clear" />
@@ -34,7 +34,7 @@
         <ion-row class="ion-align-items-center">
           <!-- Boton ahorcado -->
           <ion-col size="6" class="ion-text-center">
-            <ion-button *ngIf="entradaAhorcado" href="/ahorcado" (click)="entradaAhorcadoTrue()"
+            <ion-button *ngIf="entradaAhorcado"
               class="btn-juego btn-ahorcado-visto" fill="clear" />
             <ion-button *ngIf="!entradaAhorcado" href="/ahorcado" (click)="entradaAhorcadoTrue()"
               class="btn-juego btn-ahorcado" fill="clear" />
