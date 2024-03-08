@@ -18,9 +18,9 @@ export class HomePage {
 
   constructor(private servi : ScoreService, private auth : Auth) {}
 
-  entradaWordle = false;
-  entradaAhorcado= false;
-  entradaTrivial = false;
+  entradaWordle = true;
+  entradaAhorcado= true;
+  entradaTrivial = true;
   entradaPuntuaciones = false;
 
   ngOnInit() {
@@ -37,16 +37,20 @@ export class HomePage {
         for(var i = 0; i < this.scores.length;i++) {
           if(this.auth.currentUser?.uid == this.scores[i].idUsuario) {
             if(this.scores[i].ptsAhorcado == 0) {
-              this.entradaAhorcado  =  true;
+              this.entradaAhorcado  =  false;
+              
             }
             if(this.scores[i].ptsTrivial == 0) {
-              this.entradaTrivial  =  true;
+              this.entradaTrivial  =  false;
             }
             if(this.scores[i].ptsWordle == 0) {
-              this.entradaWordle=  true;
+              this.entradaWordle=  false;
             }
           }
         }
+        console.log("ahorcado:",this.entradaAhorcado)
+        console.log("trivial:",this.entradaTrivial)
+        console.log("wordle:",this.entradaWordle)
       }
     )
   }
