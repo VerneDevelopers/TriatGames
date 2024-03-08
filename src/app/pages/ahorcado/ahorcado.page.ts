@@ -100,6 +100,8 @@ export class AhorcadoPage implements OnInit {
      }
    }
 
+   this.letra=""
+
 
    if (this.palabraDia === this.palabraOculta) {
     this.resultado = "ganado";
