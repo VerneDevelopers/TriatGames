@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM node:18-alpine AS build
+FROM node:slim AS build
 # Directorio donde se mantendran los archivos de la app
 WORKDIR /usr/src/app
 # Copiar el package.json y el package-lock en nuestro WORKDIR
