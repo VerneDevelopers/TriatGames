@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { AngularFireModule } from "@angular/fire/compat";
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
@@ -12,7 +12,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
 import { ComponentsModule } from './components/components.module';
+import { HttpClientModule } from '@angular/common/http';
+
+import { DatePipe } from '@angular/common';
+
+
 
 
 @NgModule({
@@ -21,14 +27,19 @@ import { ComponentsModule } from './components/components.module';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-ComponentsModule,
+ 
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    ComponentsModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), 
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
-    provideFirestore(() => getFirestore())
-  ],
+    provideFirestore(() => getFirestore()),
 
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  ],
+  //Aquí añado DatePipe para formatear fechas
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },DatePipe],
+
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

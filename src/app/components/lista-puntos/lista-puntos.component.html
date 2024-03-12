@@ -1,0 +1,11 @@
+  <ion-list class="lista-puntos">
+    <ion-card *ngFor="let item of listaVisible; let i = index">
+      <ion-card-header>
+        <ion-card-title >{{ i + 1 }}º - {{ item.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Puntos: {{ item.puntuacion }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+  <ion-button *ngIf="!mostrarTodos" (click)="muestraTodos()" class="btn-ver-todos">Ver todos</ion-button>

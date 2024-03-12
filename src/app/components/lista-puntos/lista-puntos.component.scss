@@ -1,0 +1,39 @@
+ion-list {
+  background-color: var(--ion-color-light);
+  display: flex;
+  flex-wrap: wrap; /* Varias lineas con wrap*/
+  justify-content: center; /* Horizontal en el centro*/
+}
+
+ion-card {
+  // width: calc(30% - 2em); /* Ancho de la tarjeta con espacio (mj) */
+  width: 80%;
+  max-width: 20em;
+  margin: 1em; /* Espacio entre cards */
+}
+
+ion-card-header {
+  background-color: #f4f4f4; 
+}
+
+ion-card-content {
+  padding: 1.5em; 
+  background-color: var(--ion-color-light);
+}
+
+ion-card-title{
+  font-weight: bold;
+  color: black;
+}
+
+.btn-ver-todos {
+  margin-top: 1em;
+  font-weight: bold;
+}
+
+.lista-puntos{
+  margin: 0 0.75em;
+}
+
+
+

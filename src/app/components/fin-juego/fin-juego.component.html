@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-item>
+            <ion-label>
+                <h1><strong>FIN DEL JUEGO</strong></h1>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                <h2>
+                    {{resultadoString}}
+                </h2>
+            </ion-label>
+        </ion-item>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>¡Ya no puedes jugar más a este juego!</ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-label>Pero siempre puedes ver el ranking y seguir jugando para superar a los demas</ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col size="6">
+                <ion-button color="warning" expand="block" href="/puntuaciones">
+                    <ion-icon slot="start" name="bar-chart"></ion-icon>
+                    RANKING
+                </ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button color="success" expand="block" href="/home">
+                    <ion-icon slot="start" name="play"></ion-icon>
+                    SEGUIR JUGANDO
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

@@ -2,9 +2,9 @@
   <ion-header>
     <ion-toolbar color="primary">
       <ion-button href="" fill="clear" slot="start" color="light">
-        <ion-icon slot="icon-only" />
+        <ion-icon slot="icon-only"name="home"/>
       </ion-button>
-      <ion-title>
+      <ion-title class="titulo">
         Menú
       </ion-title>
     </ion-toolbar>
@@ -12,9 +12,10 @@
   <ion-content class="ion-padding">
     <!--Opciones vacias del menú-->
     <ion-list>
-      <ion-item button="true" href="">Wordle</ion-item>
-      <ion-item button="true" href="">Ahorcado</ion-item>
-      <ion-item button="true" href="">Trivial</ion-item>
+      <ion-item button="true" href="/wordle">Wordle</ion-item>
+      <ion-item button="true" href="/ahorcado">Ahorcado</ion-item>
+      <ion-item button="true" href="/trivial">Trivial</ion-item>
+      <ion-item button="true" href="/who-are">Quienes somos</ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { MiheaderComponent } from './miheader.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
 
 describe('MiheaderComponent', () => {
   let component: MiheaderComponent;
@@ -10,7 +11,8 @@ describe('MiheaderComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MiheaderComponent ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
+      providers:[HttpClient,HttpHandler]
     }).compileComponents();
 
     fixture = TestBed.createComponent(MiheaderComponent);

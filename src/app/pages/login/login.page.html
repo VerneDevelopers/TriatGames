@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>TriatGame - Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,8 +8,8 @@
 
   <div class="centrar-form">
     <form [formGroup]="form" (ngSubmit)="submit()" (keypress.enter)="submit()">
-
-      <ion-icon class="icon-enter" name="person-circle-sharp" color="primary" ion-text-center></ion-icon>
+      <img src="assets/img/logo.png" alt="TriatGames" class="logo">
+      <!-- <ion-icon class="icon-enter" name="person-circle-sharp" color="primary" ion-text-center></ion-icon> -->
       <ion-text color="primary">
         <h1><Strong>TriatGames </Strong>app</h1>
       </ion-text>
@@ -33,9 +33,9 @@
         <div *ngIf="form.controls.password.errors?.['required']">La contraseña es requerido</div>
       </div>
 
-     <!--  POR SI SE DESEA RECUPERAR LA CONTRASEÑA
-      <p routerLink="forgot-password" class="ion-text-end">¿Olvidaste tu contraseña?</p> 
-      -->
+      <!-- RECUPERAR CONTRASEÑA -->
+      <p class="ion-text-end"><a routerLink="forgot-password" class="ion-text-end">¿Olvidaste tu contraseña? </a></p>
+     
 
       <ion-button  expand="block" type="submit" [disabled]="form.invalid">
         Ingresar
