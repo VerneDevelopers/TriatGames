@@ -50,8 +50,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
    },
-  {
+   {
     path: 'puntuaciones',
+    loadChildren: () => import('./pages/puntuaciones/puntuaciones.module').then( m => m.PuntuacionesPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+
+  {
+    path: 'puntuaciones/:juego',
     loadChildren: () => import('./pages/puntuaciones/puntuaciones.module').then( m => m.PuntuacionesPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },

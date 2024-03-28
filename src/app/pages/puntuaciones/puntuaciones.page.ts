@@ -53,8 +53,11 @@ export class PuntuacionesPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log("entra")
     this.route.paramMap.subscribe(params => {
+      console.log("params:", params)
       const idParam = params.get('juego');
+      console.log("idParam:", idParam)
       if (idParam !== null) {
         if (idParam == "") {
           this.juego = "global";
