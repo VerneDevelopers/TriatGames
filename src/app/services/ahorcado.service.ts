@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collection, doc, setDoc, getDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Firestore, collection, doc, setDoc, getDoc, collectionData } from '@angular/fire/firestore';
+import { Observable, map } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Data } from '@angular/router';
+import { ILetrasAhorcado } from '../interfaces/ILetrasAhorcado';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AhorcadoService {
+  private  opcionesDeFormato: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  };
+
   constructor(private afs: AngularFirestore, private firestore: Firestore) { }
 
   async addJugada(userId: string, letra: string, fecha: Date): Promise<boolean> {
-    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    };
-
     const data = { letra };
-
-    const fechaFormato: string = fecha.toLocaleString("es-ES", opcionesDeFormato)
+    const fechaFormato: string = fecha.toLocaleString("es-ES", this.opcionesDeFormato)
       .split('/').reverse().join('/');
-    const documentRef = doc(collection(this.firestore, `${userId}/Ahorcado/${fechaFormato}`));
+    const documentRef = doc(collection(this.firestore, `Ahorcado/${fechaFormato}/${userId}`));
 
     //Comprobacion de que no este ya la letra, que no se ha jugado ya la letra que se pasa por parametro
     const docSnapshot = await getDoc(documentRef);
@@ -37,28 +37,38 @@ export class AhorcadoService {
     return true;
   }
 
-  getLetraporDia(userId: string, fecha: Date): Observable<Data[]> {
-    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    };
+  getLetraporDia(userId: string, fecha: Date): Observable<any> {
+   
 
-    const fechaFormato: string = fecha.toLocaleString("es-ES", opcionesDeFormato)
+    const fechaFormato: string = fecha.toLocaleString("es-ES", this.opcionesDeFormato)
       .split('/').reverse().join('/');
-    return this.afs.collection<Data>(`${userId}/Ahorcado/${fechaFormato}`).valueChanges();
+    return this.afs.collection<any>(`Ahorcado/${fechaFormato}/${userId}`).valueChanges();
   }
 
-  getPalabraDia( fecha: Date): Observable<Data[]> {
-    const opcionesDeFormato: Intl.DateTimeFormatOptions = {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    };
 
-    const fechaFormato: string = fecha.toLocaleString("es-ES", opcionesDeFormato)
+  misJugadas(userId: string): Observable<ILetrasAhorcado[]> {
+    var fecha = new Date();
+
+    const fechaFormato: string = fecha.toLocaleString("es-ES", this.opcionesDeFormato)
       .split('/').reverse().join('/');
-    return this.afs.collection<Data>(`Ahorcado/palabra/${fechaFormato}`).valueChanges();
+    const document = collection(
+      this.firestore,
+      `Ahorcado/${fechaFormato}/${userId}`
+      );
+    return collectionData(document)
+      .pipe(
+        map(letra => letra as ILetrasAhorcado[])
+      );
+
+  }
+
+
+  getPalabraDia( fecha: Date): Observable<string[]> {
+   
+
+    const fechaFormato: string = fecha.toLocaleString("es-ES", this.opcionesDeFormato)
+      .split('/').reverse().join('/');
+    return this.afs.collection<string>(`Ahorcado/palabra/${fechaFormato}`).valueChanges();
   }
 
 }
