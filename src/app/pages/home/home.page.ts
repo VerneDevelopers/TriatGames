@@ -33,6 +33,11 @@ export class HomePage {
         this.scores = resp;
         
         console.log(this.scores)
+        if(this.scores.length == 0) {
+          this.entradaAhorcado  =  true;
+          this.entradaTrivial  =  true;
+          this.entradaWordle=  true;
+        }
         for(var i = 0; i < this.scores.length;i++) {
           if(this.auth.currentUser?.uid == this.scores[i].idUsuario) {
             
