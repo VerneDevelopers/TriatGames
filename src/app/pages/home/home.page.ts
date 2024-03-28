@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { ServicioWordleService } from '../services/servicio-wordle.service';
-import { ScoreService } from '../services/score.service';
-import { IPuntuacion } from '../interfaces/i-puntuacion';
+import { ScoreService } from '../../services/score.service';
+import { IPuntuacion } from '../../interfaces/i-puntuacion';
 import { Auth } from '@angular/fire/auth';
 
 @Component({
@@ -18,10 +17,10 @@ export class HomePage {
 
   constructor(private servi : ScoreService, private auth : Auth) {}
 
-  entradaWordle = true;
-  entradaAhorcado= true;
-  entradaTrivial = true;
-  entradaPuntuaciones = false;
+  entradaWordle = false;
+  entradaAhorcado= false;
+  entradaTrivial = false;
+  entradaPuntuaciones = true;
 
   ngOnInit() {
     this.repasar()
@@ -33,18 +32,21 @@ export class HomePage {
       resp => {
         this.scores = resp;
         
-
+        console.log(this.scores)
         for(var i = 0; i < this.scores.length;i++) {
           if(this.auth.currentUser?.uid == this.scores[i].idUsuario) {
+            
             if(this.scores[i].ptsAhorcado == 0) {
-              this.entradaAhorcado  =  false;
-              
+              this.entradaAhorcado  =  true;
+              console.log("ahorcado:",this.entradaAhorcado)
             }
             if(this.scores[i].ptsTrivial == 0) {
-              this.entradaTrivial  =  false;
+              this.entradaTrivial  =  true;
+              console.log("trivial:",this.entradaTrivial)
             }
             if(this.scores[i].ptsWordle == 0) {
-              this.entradaWordle=  false;
+              this.entradaWordle=  true;
+              console.log("wordle:",this.entradaWordle)
             }
           }
         }

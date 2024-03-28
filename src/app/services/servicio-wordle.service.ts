@@ -84,7 +84,7 @@ export class ServicioWordleService {
     palabra = await promesaPalabrasDia;
 
     if (palabra == "") {
-      palabra = "Hoy no hay palabra"
+      palabra = "mosca"
     }
 
     return palabra;

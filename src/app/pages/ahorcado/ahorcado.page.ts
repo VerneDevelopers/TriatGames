@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Data } from '@angular/router';
-import { AhorcadoService } from 'src/app/services/ahorcado/ahorcado.service';
+import { AhorcadoService } from 'src/app/services/ahorcado.service';
 
 
 
