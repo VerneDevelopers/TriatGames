@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { PalabraWordle } from 'src/app/interfaces/palabraWordle';
 import { AuthService } from 'src/app/services/auth.service';
-import { ServicioWordleService } from 'src/app/services/servicio-wordle.service';
+import { WordleService } from 'src/app/services/wordle.service';
 
 @Component({
   selector: 'app-wordle',
@@ -22,7 +22,7 @@ export class WordlePage {
   resultado = "ganado";
 
   constructor(
-    private wordleServ: ServicioWordleService,
+    private wordleServ: WordleService,
     private toastController: ToastController,
     private authServ: AuthService
   ) { }

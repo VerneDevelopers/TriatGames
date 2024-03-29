@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ServicioWordleService } from './servicio-wordle.service';
+import { WordleService } from './wordle.service';
 import { Firestore } from '@angular/fire/firestore';
 
 describe('ServicioWordleService', () => {
-  let service: ServicioWordleService;
+  let service: WordleService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -31,7 +31,7 @@ describe('ServicioWordleService', () => {
         }
       ]
     });
-    service = TestBed.inject(ServicioWordleService);
+    service = TestBed.inject(WordleService);
   });
 
   it('should be created', () => {

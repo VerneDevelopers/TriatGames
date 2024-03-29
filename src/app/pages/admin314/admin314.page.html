@@ -8,6 +8,29 @@
       <ion-content [fullscreen]="true" class="ion-padding">
           <h1>Administración</h1>
      
+
+      <p> Cargar palabras para el Wordle</p>
+      <input type="file" (change)="CargarWordle($event)">
+      <div *ngFor="let line of lines">
+        {{ line }}
+      </div>
+      <p>Palabra de hoy</p>
+      <p><ion-button (click)="calcularPalabraHoy('wordle')" expand="block" fill="clear" shape="round">
+        Click me
+      </ion-button></p>
+      <hr />
+
+
+      <p> Cargar palabras para el Ahorcado</p>
+      <input type="file" (change)="CargarAhorcado($event)">
+      <div *ngFor="let line of lines2">
+        {{ line }}
+      </div>
+      <p>Palabra de hoy</p>
+      <p><ion-button (click)="calcularPalabraHoy('ahorcado')" expand="block" fill="clear" shape="round">
+        Click me
+      </ion-button></p>
+      
   </ion-content>
   </div>
 </ion-content>

@@ -49,7 +49,7 @@ export class AhorcadoPage implements OnInit {
 
 
     this.fecha = new Date()
-    console.log(this.userUid)
+   // console.log(this.userUid)
     //this.serv.getPalabraDia(this.fecha).subscribe( resp => { this.palabraDia = resp})
   }
 
@@ -74,17 +74,10 @@ export class AhorcadoPage implements OnInit {
 
 
   ionViewWillEnter() {
-    this.serv.getPalabraDia(this.fecha).subscribe(resp => {
-      if (resp != undefined && resp.length > 0) {
-        this.palabraDia = resp[0]
-        console.log("Palabra: ", this.palabraDia)
-      } else {
-        this.palabraDia = 'pandereta'
-      }
+    this.serv.palabraDia().then(resp => {
+      this.palabraDia = resp
+    //  console.log("Palabra: ", this.palabraDia)
       this.palabraOculta = '-'.repeat(this.palabraDia.length)
-
-
-
 
       this.serv.misJugadas(this.userUid).subscribe(resp => {
         this.letrasJugadas = []
@@ -92,7 +85,7 @@ export class AhorcadoPage implements OnInit {
           if (element.letra != '')
             this.letrasJugadas.push(element.letra)
         });
-        console.log("MisJugadas:", resp)
+      //  console.log("MisJugadas:", resp)
         this.calcularPalabra();
       });
     });
