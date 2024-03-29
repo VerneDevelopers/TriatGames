@@ -5,40 +5,54 @@
     <div class="ion-text-center">
 
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="ion-text-center">
-    <ion-grid>
-      <ion-img [src]="ruta + ahorcadoImgs[indiceImagen]" style="width: 100px; height: auto;"></ion-img>
-      <ion-row>
-        <ion-col size="8">
-          <!-- Cambio esto para que solo se pueda introducir una letra y no explote el servicio -->
-          <ion-input placeholder="Letra" class="input" [(ngModel)]="letra" type="text" maxlength="1"></ion-input>
-        </ion-col>
-        <ion-col size="4">
-          <ion-button expand="full" shape="round" (click)="addLetra()">Click</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+      <ion-content [fullscreen]="true" class="ion-padding">
+        <div class="ion-text-center">
+          <ion-grid>
+            <ion-img [src]="ruta + ahorcadoImgs[indiceImagen]" style="width: 100px; height: auto;"></ion-img>
+            <ion-row>
+              <ion-col size="8">
+                <!-- Cambio esto para que solo se pueda introducir una letra y no explote el servicio -->
+                <ion-input placeholder="Letra" class="input" [(ngModel)]="letra" type="text" maxlength="1"></ion-input>
+              </ion-col>
+              <ion-col size="4">
+                <ion-button expand="full" shape="round" (click)="addLetra()">Click</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
 
-    <!-- Muestro los guioncitos -->
-    <div *ngIf="palabraOculta">
-      <p>Palabra a adivinar:</p>
-      <p>{{ palabraOculta }}</p>
+          <!-- Muestro los guioncitos -->
+          <div *ngIf="palabraOculta">
+            <p>Palabra a adivinar:</p>
+            
+            <ion-grid >
+              <ion-row class="ahorcadoRow">
+                <ion-col *ngFor="let letra of palabraOculta.split(''); let i = index" [ngClass]="colores[i]" >
+                  {{letra}}
+                </ion-col>
+              </ion-row>  
+            </ion-grid>
+          </div>
+         
+          <ion-list *ngIf="letrasJugadas.length > 0">
+            <ion-item>
+              <ion-label>Letras introducidas:</ion-label>
+            </ion-item>
+            <ion-item >
+              <ion-grid >
+                <ion-row class="ahorcadoRow">
+                  <ion-col size="2"  *ngFor="let letra of letrasJugadas; let i = index"  [ngClass]="coloresletras[i]">
+                    <ion-label >{{ letra }}</ion-label>
+                  </ion-col>
+    
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div *ngIf="abrirModal">
+          <app-abrir-modal-fin resultado="{{resultado}}" idJuego="Ahorcado" />
+        </div>
+      </ion-content>
     </div>
-
-    <ion-list *ngIf="dataHoy.length > 0">
-      <ion-item>
-        <ion-label>Letras introducidas:</ion-label>
-      </ion-item>
-      <ion-item *ngFor="let letra of dataHoy">
-        <ion-label>{{ letra.letra }}</ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
-
-  <div *ngIf="abrirModal">
-    <app-abrir-modal-fin resultado="{{resultado}}" idJuego="Ahorcado"/>
-  </div>
-</ion-content>
-
-
+  </ion-content>

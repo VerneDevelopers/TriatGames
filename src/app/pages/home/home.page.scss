@@ -1,0 +1,54 @@
+ion-col, ion-card {
+  height: 90%;
+}
+
+ion-grid, ion-row  {
+  height: 50%;
+}
+
+.container{
+  height: 100%;
+  margin-top: 10%;
+}
+
+.btn-wordle-visto {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../assets/img/btn-wordle-bg.png");
+}
+
+.btn-wordle {
+  background: url("../../../assets/img/btn-wordle-bg.png");
+}
+
+.btn-trivial-visto {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../assets/img/btn-trivia-bg.png");
+}
+
+.btn-trivial {
+  background: url("../../../assets/img/btn-trivia-bg.png");
+}
+
+.btn-ahorcado-visto {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../assets/img/btn-ahorcado-bg.png");
+}
+
+.btn-ahorcado {
+  background: url("../../../assets/img/btn-ahorcado-bg.png");
+}
+
+.btn-puntuaciones-visto {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../../assets/img/btn-puntuaciones-bg.png");
+}
+
+.btn-puntuaciones {
+  background: url("../../../assets/img/btn-puntuaciones-bg.png");
+}
+
+.btn-juego {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+  background-size: cover;
+  background-position: center;
+}

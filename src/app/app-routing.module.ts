@@ -8,7 +8,7 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
@@ -47,13 +47,25 @@ const routes: Routes = [
   },
   {
     path: 'edit-profile',
-    loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule),
+    loadChildren: () => import('./pages/edit-profile/edit-profile.module').then( m => m.EditProfilePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
    },
-  {
+   {
     path: 'puntuaciones',
     loadChildren: () => import('./pages/puntuaciones/puntuaciones.module').then( m => m.PuntuacionesPageModule),
     ...canActivate(redirectUnauthorizedToLogin)
+  },
+
+  {
+    path: 'puntuaciones/:juego',
+    loadChildren: () => import('./pages/puntuaciones/puntuaciones.module').then( m => m.PuntuacionesPageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'admin314',
+    loadChildren: () => import('./pages/admin314/admin314.module').then( m => m.Admin314PageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
+
   }
 
 
