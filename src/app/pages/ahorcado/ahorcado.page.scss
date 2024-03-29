@@ -54,3 +54,70 @@
   color: var(--ion-color-light);
 }
 
+.imgahorcado{
+  width: 200px;
+  height: 300px;
+  background-size: cover;
+
+}
+
+.img1{
+  background-image: url('../../../assets/img/Ahorcado/1.png');
+  }
+  .img2{
+  background-image: url('../../../assets/img/Ahorcado/2.png');
+  }
+
+ .img3{
+  background-image: url('../../../assets/img/Ahorcado/3.png');
+ }
+ .img4{
+  background-image: url('../../../assets/img/Ahorcado/4.png');
+ }
+
+ .img5{
+  background-image: url('../../../assets/img/Ahorcado/5.png');
+ }
+ .img6{
+  background-image: url('../../../assets/img/Ahorcado/6.png');
+ }
+ .img7{
+  background-image: url('../../../assets/img/Ahorcado/7.png');
+ }
+ .img8{
+  background-image: url('../../../assets/img/Ahorcado/8.png');
+ }
+
+
+@media (prefers-color-scheme: dark) {
+  /*
+   * Dark Colors
+   * -------------------------------------------
+   */
+    .img1{
+    background-image: url('../../../assets/img/Ahorcado/1B.png');
+    }
+    .img2{
+    background-image: url('../../../assets/img/Ahorcado/2B.png');
+    }
+
+   .img3{
+    background-image: url('../../../assets/img/Ahorcado/3B.png');
+   }
+   .img4{
+    background-image: url('../../../assets/img/Ahorcado/4B.png');
+   }
+
+   .img5{
+    background-image: url('../../../assets/img/Ahorcado/5B.png');
+   }
+   .img6{
+    background-image: url('../../../assets/img/Ahorcado/6B.png');
+   }
+   .img7{
+    background-image: url('../../../assets/img/Ahorcado/7B.png');
+   }
+   .img8{
+    background-image: url('../../../assets/img/Ahorcado/8B.png');
+   }
+}

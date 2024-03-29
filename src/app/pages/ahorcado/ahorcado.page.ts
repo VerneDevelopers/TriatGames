@@ -14,90 +14,43 @@ import { AhorcadoService } from 'src/app/services/ahorcado.service';
 })
 export class AhorcadoPage implements OnInit {
   userUid: string
-  fecha !: Date
+  //fecha !: Date
   letrasJugadas: string[] = []
   //palabraDia !: any
   palabraDia = '';
   colores: string[] = [];
   coloresletras: string[] = [];
-
   palabraOculta = '';
   letra: string = ''
-  vidas: number = 8
-  ahorcadoImgs: string[] = [
-    '0.png',
-    '1.png',
-    '2.png',
-    '3.png',
-    '4.png',
-    '5.png',
-    '6.png',
-    '7.png',
-    '8.png'
-  ]
-  ruta: string = "../../../assets/img/Ahorcado/"
   indiceImagen: number = 0;
   abrirModal = false;
   resultado = "ganado";
+
   constructor(private serv: AhorcadoService, private auth: Auth) {
     if (this.auth.currentUser?.uid != null)
       this.userUid = this.auth.currentUser?.uid.toString()
     else
       this.userUid = 'Error'
-
-
-
-
-    this.fecha = new Date()
-   // console.log(this.userUid)
-    //this.serv.getPalabraDia(this.fecha).subscribe( resp => { this.palabraDia = resp})
   }
-
-
-
-
   ngOnInit() {
-
-
-
-
-    /*
-    var fecha:Date=new Date()
-    this.miServicio.getLetraporDia("userid",fecha).subscribe(
-      (s) => {
-        console.log(s)
-      },
-      (error) => console.error(error)
-    );
-    */
   }
-
 
   ionViewWillEnter() {
     this.serv.palabraDia().then(resp => {
       this.palabraDia = resp
-    //  console.log("Palabra: ", this.palabraDia)
       this.palabraOculta = '-'.repeat(this.palabraDia.length)
-
       this.serv.misJugadas(this.userUid).subscribe(resp => {
         this.letrasJugadas = []
         resp.forEach(element => {
           if (element.letra != '')
             this.letrasJugadas.push(element.letra)
         });
-      //  console.log("MisJugadas:", resp)
         this.calcularPalabra();
       });
     });
-
-
   }
-
-
-
-
-
   calcularPalabra() {
+    this.indiceImagen = 0;
     this.letrasJugadas.forEach(letra => {
       if (this.palabraDia.toLowerCase().includes(letra.toLowerCase())) {
         for (let i = 0; i < this.palabraDia.length; i++) {
@@ -107,12 +60,12 @@ export class AhorcadoPage implements OnInit {
         }
       } else {
         this.indiceImagen++;
-        if (this.indiceImagen >= this.ahorcadoImgs.length) {
+        if (this.indiceImagen >= 8) {
           this.indiceImagen = 8;
         }
       }
     });
-
+    this.colores = [];
     this.palabraOculta.split("").forEach(letra => {
       if (letra == "-")
         this.colores.push("ahorcadoCol R");
@@ -120,7 +73,7 @@ export class AhorcadoPage implements OnInit {
         this.colores.push("ahorcadoCol V");
     });
 
-
+    this.coloresletras = [];
     this.letrasJugadas.forEach(letra => {
       if (this.palabraDia.toLowerCase().includes(letra.toLowerCase())) {
         this.coloresletras.push("ahorcadoCol V");
@@ -132,18 +85,17 @@ export class AhorcadoPage implements OnInit {
       this.resultado = "ganado";
       this.abrirModal = true;
     }
+
+    if (this.indiceImagen >= 8) {
+      this.resultado = "perdido";
+      this.abrirModal = true;
+    }
   }
-
-
   addLetra() {
-    this.serv.addJugada(this.userUid, this.letra.toUpperCase(), this.fecha).then(resp => {
+    this.serv.addJugada(this.userUid, this.letra.toUpperCase(), new Date()).then(resp => {
       this.calcularPalabra()
     });
-
     this.letra = ""
-
-
-
   }
 
 
