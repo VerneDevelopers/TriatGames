@@ -14,7 +14,7 @@ export class MiheaderComponent  implements OnInit {
   email: string=  "user@email.com"
   ngOnInit() {
     this.auth.getUserProfile().subscribe((user)=>{
-      console.log(user) 
+  //    console.log(user) 
       this.name = user.name;
       this.email = user.email;
     })

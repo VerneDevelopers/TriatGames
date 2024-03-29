@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Jugador } from '../interfaces/jugador';
-import { AuthService } from '../services/auth.service';
+import { Jugador } from '../../interfaces/jugador';
+import { AuthService } from '../../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
